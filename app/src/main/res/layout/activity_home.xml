@@ -53,9 +53,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="195dp" />
 
+
             </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
             <TextView
                 android:id="@+id/textView"
