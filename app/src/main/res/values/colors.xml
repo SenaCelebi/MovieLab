@@ -9,4 +9,5 @@
     <color name="colorGrey1">#949494</color>
     <color name="colorGrey2">#d4d4d4</color>
     <color name="transparent">#00d9d9d9</color>
+    <color name="colorTint">#47ccb718</color>
 </resources>
