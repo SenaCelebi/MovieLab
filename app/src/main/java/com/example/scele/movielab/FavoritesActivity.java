@@ -54,22 +54,12 @@ public class FavoritesActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_favorites:
-
-                        intent = new Intent(FavoritesActivity.this, FavoritesActivity.class);
-                        startActivity(intent);
                         break;
 
                     case R.id.nav_watchlist:
-
                         intent = new Intent(FavoritesActivity.this, WatchListActivity.class);
                         startActivity(intent);
                         break;
-                }
-
-                if(intent ==null ){
-
-                    intent = new Intent(FavoritesActivity.this, HomeActivity.class);
-                    startActivity(intent);
                 }
 
                 return false;

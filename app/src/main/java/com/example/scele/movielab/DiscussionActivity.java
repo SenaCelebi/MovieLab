@@ -48,9 +48,6 @@ public class DiscussionActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_discuss:
-
-                        intent = new Intent(DiscussionActivity.this, DiscussionActivity.class);
-                        startActivity(intent);
                         break;
 
                     case R.id.nav_favorites:
@@ -64,12 +61,6 @@ public class DiscussionActivity extends AppCompatActivity {
                         intent = new Intent(DiscussionActivity.this, WatchListActivity.class);
                         startActivity(intent);
                         break;
-                }
-
-                if(intent ==null ){
-
-                    intent = new Intent(DiscussionActivity.this, HomeActivity.class);
-                    startActivity(intent);
                 }
 
                 return false;

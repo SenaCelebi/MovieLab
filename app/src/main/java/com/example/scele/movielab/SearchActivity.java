@@ -42,9 +42,6 @@ public class SearchActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_search:
-
-                        intent = new Intent(SearchActivity.this, SearchActivity.class);
-                        startActivity(intent);
                         break;
 
                     case R.id.nav_discuss:
@@ -64,12 +61,6 @@ public class SearchActivity extends AppCompatActivity {
                         intent = new Intent(SearchActivity.this, WatchListActivity.class);
                         startActivity(intent);
                         break;
-                }
-
-                if(intent ==null ){
-
-                    intent = new Intent(SearchActivity.this, HomeActivity.class);
-                    startActivity(intent);
                 }
 
                 return false;
