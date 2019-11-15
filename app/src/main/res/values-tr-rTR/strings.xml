@@ -18,4 +18,8 @@
     <string name="btn_register_Register">Kaydol</string>
     <string name="create_a_cinelab_account">CineLab Hesabı Oluştur</string>
     <string name="logout_over_flow">Çıkış Yap</string>
+    <string name="the_most_popular_movies">En Çok İzlenen Filmler</string>
+    <string name="ara">Ara...</string>
+    <string name="detail_movie_descr">Logan Türkçe Part...</string>
+    <string name="release_year">Yıl</string>
 </resources>

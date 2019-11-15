@@ -28,20 +28,21 @@
 
 
     </android.support.design.widget.TabLayout>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/main_content_for_recycle_view"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indicator">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView2"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.BottomNavigationView
@@ -60,7 +61,17 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_navigation" />
 
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/the_most_popular_movies"
+        style="@style/textInputHintStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicator" />
 
 
 </android.support.constraint.ConstraintLayout>

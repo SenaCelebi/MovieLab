@@ -18,5 +18,10 @@
     <string name="btn_register_Register">Register</string>
     <string name="create_a_cinelab_account">Create a CineLab Account</string>
     <string name="logout_over_flow">Logout</string>
+    <string name="the_most_popular_movies">The Most Popular Movies</string>
+    <string name="ara">Search...</string>
+    <string name="detail_movie_descr">In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet life. But when Laura, a mutant child pursued by scientists, comes to him for help, he must get her to safety.</string>
+    <string name="release_year">Release Year</string>
+
 
 </resources>
