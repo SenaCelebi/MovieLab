@@ -53,16 +53,7 @@ public class WatchListActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_watchlist:
-
-                        intent = new Intent(WatchListActivity.this, WatchListActivity.class);
-                        startActivity(intent);
                         break;
-                }
-
-                if(intent ==null ){
-
-                    intent = new Intent(WatchListActivity.this, HomeActivity.class);
-                    startActivity(intent);
                 }
 
                 return false;

@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:
-                 intent = new Intent(LoginActivity.this,MainActivity.class);
+                 intent = new Intent(LoginActivity.this,HomeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_register_inlogin:
