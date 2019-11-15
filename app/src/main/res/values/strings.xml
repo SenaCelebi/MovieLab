@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">MovieLab</string>
+    <string name="app_name">CineLab</string>
+    <string name="rate">rate</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_discuss">Discussions</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_watch_list">WatchList</string>
+
 </resources>
