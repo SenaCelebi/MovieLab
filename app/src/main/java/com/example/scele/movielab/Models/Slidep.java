@@ -1,4 +1,4 @@
-package com.example.scele.movielab;
+package com.example.scele.movielab.Models;
 
 public class Slidep {
 

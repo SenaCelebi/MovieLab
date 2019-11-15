@@ -1,4 +1,4 @@
-package com.example.scele.movielab;
+package com.example.scele.movielab.Models;
 
 import java.io.Serializable;
 

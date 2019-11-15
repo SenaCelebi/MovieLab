@@ -1,4 +1,4 @@
-package com.example.scele.movielab;
+package com.example.scele.movielab.Adapters;
 
 import android.content.Context;
 import android.view.View;
