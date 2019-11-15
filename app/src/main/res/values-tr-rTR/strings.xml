@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CineLab</string>
+    <string name="rate">puan</string>
+    <string name="movie_name">Film Adı</string>
+    <string name="nav_home">Ana Sayfa</string>
+    <string name="nav_search">Arama</string>
+    <string name="nav_discuss">Yorumlar</string>
+    <string name="nav_favorites">Favoriler</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_watch_list">İzleme Listesi</string>
+    <string name="btn_login">Giriş Yap</string>
+    <string name="hint_password">Şifre</string>
+    <string name="register_detail_if_you_don_t_have_a_account">Hesabın yok mu?</string>
+    <string name="btn_register">Kaydol</string>
+    <string name="name_and_surname_register">Ad ve Soyad</string>
+    <string name="password_register">Şifre</string>
+    <string name="btn_register_Register">Kaydol</string>
+    <string name="create_a_cinelab_account">CineLab Hesabı Oluştur</string>
+    <string name="logout_over_flow">Çıkış Yap</string>
+</resources>
