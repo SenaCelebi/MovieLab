@@ -78,7 +78,6 @@
         android:id="@+id/navigation_bar"
         android:layout_width="wrap_content"
         android:layout_height="59dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         app:itemIconTint="@color/colorAccent"
         app:itemTextColor="@color/colorGrey1"
