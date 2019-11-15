@@ -8,8 +8,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Switch;
+
+import com.example.scele.movielab.BackgroundTasks.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,4 +83,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.over_flow, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        SessionManager sm = new SessionManager(this);
+        sm.logout();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+
+    }
 }

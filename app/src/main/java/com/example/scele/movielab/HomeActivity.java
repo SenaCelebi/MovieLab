@@ -1,6 +1,7 @@
 package com.example.scele.movielab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,11 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import com.example.scele.movielab.BackgroundTasks.SessionManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +40,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logoaction);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         viewPager = findViewById(R.id.slider_pager);
         indicator = findViewById(R.id.indicator);
@@ -72,7 +81,23 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.over_flow, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        SessionManager sm = new SessionManager(this);
+        sm.logout();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+        return super.onOptionsItemSelected(item);
+
+    }
 
 
 }

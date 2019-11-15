@@ -4,7 +4,7 @@
     <string name="movie_name">Movie Name</string>
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
-    <string name="nav_discuss">Discussions</string>
+    <string name="nav_discuss">Comments</string>
     <string name="nav_favorites">Favorites</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_watch_list">WatchList</string>
@@ -17,5 +17,6 @@
     <string name="password_register">Password</string>
     <string name="btn_register_Register">Register</string>
     <string name="create_a_cinelab_account">Create a CineLab Account</string>
+    <string name="logout_over_flow">Logout</string>
 
 </resources>
