@@ -5,5 +5,8 @@
     <color name="colorAccent">#ccb718</color>
     <color name="colorBackground">#202020</color>
     <color name="colorBackgroundCardView">#212121</color>
+    <color name="colorEditText">#23949494</color>
     <color name="colorGrey1">#949494</color>
+    <color name="colorGrey2">#d4d4d4</color>
+    <color name="transparent">#00d9d9d9</color>
 </resources>

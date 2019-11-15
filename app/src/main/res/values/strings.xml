@@ -8,5 +8,9 @@
     <string name="nav_favorites">Favorites</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_watch_list">WatchList</string>
+    <string name="btn_login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="register_detail_if_you_don_t_have_a_account">If you don\'t have a account,</string>
+    <string name="btn_register">Register</string>
 
 </resources>

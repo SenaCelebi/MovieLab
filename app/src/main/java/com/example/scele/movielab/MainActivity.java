@@ -14,7 +14,7 @@ import android.widget.Switch;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView navigationView;
-    Intent intent;
+    Intent intent = null;
 
 
     @Override
