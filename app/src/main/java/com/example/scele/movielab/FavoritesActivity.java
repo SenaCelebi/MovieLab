@@ -83,4 +83,8 @@ public class FavoritesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

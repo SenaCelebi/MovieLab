@@ -86,4 +86,8 @@ public class WatchListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

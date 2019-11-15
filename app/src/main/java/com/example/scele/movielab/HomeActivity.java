@@ -173,6 +173,9 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         return super.onOptionsItemSelected(item);
 
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 
 }
