@@ -19,13 +19,13 @@ import com.example.scele.movielab.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder> {
+public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyViewHolder> {
 
     Context context;
     List<Movie> Data;
     MovieItemClickListener movieItemClickListener;
 
-    public MovieAdaptor(Context context, List<Movie> data, MovieItemClickListener movieItemClickListener) {
+    public AdaptorFavorites(Context context, List<Movie> data, MovieItemClickListener movieItemClickListener) {
         this.context = context;
         Data = data;
         this.movieItemClickListener = movieItemClickListener;
@@ -35,7 +35,7 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.movie_item,viewGroup,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_favorites,viewGroup,false);
         return new MyViewHolder(view);
 
 
@@ -61,8 +61,8 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            movie_Title = itemView.findViewById(R.id.tv_movie_name_list_item);
-            poster = itemView.findViewById(R.id.iv_movie_poster_list_item);
+            movie_Title = itemView.findViewById(R.id.tv_movie_name_favorites_item_name);
+            poster = itemView.findViewById(R.id.iv_movie_poster_favorites_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

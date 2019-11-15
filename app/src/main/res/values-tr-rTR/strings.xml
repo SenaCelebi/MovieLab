@@ -20,6 +20,10 @@
     <string name="logout_over_flow">Çıkış Yap</string>
     <string name="the_most_popular_movies">En Çok İzlenen Filmler</string>
     <string name="ara">Ara...</string>
-    <string name="detail_movie_descr">Logan Türkçe Part...</string>
+    <string name="detail_movie_descr">Yakın bir gelecekte geçen filmde Logan (Hugh Jackman) artık yaşlanmış ve yorulmuş, süper yetenekleri erozyona uğramaya başlamıştır.Unutkanlaşan Profesörü, Meksika sınırına yakın bir yerde saklamaktadır. </string>
     <string name="release_year">Yıl</string>
+    <string name="make_comments">Sen de yorum yap...</string>
+    <string name="favorilerim">Favorilerim</string>
+    <string name="my_watchlist">İzlenecekler Listem</string>
+    <string name="let_s_discuss">Haydi sen de yorum yap!</string>
 </resources>

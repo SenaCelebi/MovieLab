@@ -22,6 +22,13 @@
     <string name="ara">Search...</string>
     <string name="detail_movie_descr">In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet life. But when Laura, a mutant child pursued by scientists, comes to him for help, he must get her to safety.</string>
     <string name="release_year">Release Year</string>
+    <string name="make_comments">Make Comments...</string>
+    <string name="favorilerim">My Favorites</string>
+    <string name="my_watchlist">My WatchList</string>
+    <string name="let_s_discuss">Let\'s discuss!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

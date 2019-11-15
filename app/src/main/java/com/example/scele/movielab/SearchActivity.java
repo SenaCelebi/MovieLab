@@ -1,20 +1,33 @@
 package com.example.scele.movielab;
 
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.example.scele.movielab.Adapters.MovieAdaptor;
+import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
+import com.example.scele.movielab.Models.Movie;
 
-public class SearchActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchActivity extends AppCompatActivity implements MovieItemClickListener{
 
     BottomNavigationView navigationView;
     Intent intent;
+    RecyclerView moviesRecycleView;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +42,21 @@ public class SearchActivity extends AppCompatActivity {
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
+
+
+        //For Recycle View
+        List<Movie> movieList = new ArrayList<>();
+        movieList.add(new Movie("Logan",R.drawable.poster1,R.drawable.bk1));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2,R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+
+        moviesRecycleView = findViewById(R.id.recycle_view_search);
+        MovieAdaptorForItem movieAdaptor = new MovieAdaptorForItem(context, movieList,this);
+        moviesRecycleView.setAdapter(movieAdaptor);
+        moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,6 +95,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -87,5 +117,18 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         return;
+    }
+
+    @Override
+    public void onMovieClick(Movie movie, ImageView moviePoster) {
+
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra("title",movie.getTitle());
+        intent.putExtra("imgURL",movie.getThumbnail());
+        intent.putExtra("imgBack",movie.getPhotoBack());
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SearchActivity.this,
+                moviePoster,"sharedName");
+        startActivity(intent,options.toBundle());
     }
 }

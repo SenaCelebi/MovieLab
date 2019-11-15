@@ -19,13 +19,13 @@ import com.example.scele.movielab.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder> {
+public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForItem.MyViewHolder2> {
 
     Context context;
     List<Movie> Data;
     MovieItemClickListener movieItemClickListener;
 
-    public MovieAdaptor(Context context, List<Movie> data, MovieItemClickListener movieItemClickListener) {
+    public MovieAdaptorForItem(Context context, List<Movie> data, MovieItemClickListener movieItemClickListener) {
         this.context = context;
         Data = data;
         this.movieItemClickListener = movieItemClickListener;
@@ -33,19 +33,16 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.movie_item,viewGroup,false);
-        return new MyViewHolder(view);
-
-
+    public MyViewHolder2 onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.movie_item_comments,viewGroup,false);
+        return new MovieAdaptorForItem.MyViewHolder2(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyViewHolder2 myViewHolder2, int i) {
 
-        myViewHolder.movie_Title.setText(Data.get(i).getTitle());
-        myViewHolder.poster.setImageResource(Data.get(i).getThumbnail());
+        myViewHolder2.movie_Title.setText(Data.get(i).getTitle());
+        myViewHolder2.poster.setImageResource(Data.get(i).getThumbnail());
     }
 
     @Override
@@ -53,16 +50,17 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder
         return Data.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+    public class MyViewHolder2 extends RecyclerView.ViewHolder {
 
         private TextView movie_Title;
         private ImageView poster;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder2(@NonNull View itemView) {
             super(itemView);
-            movie_Title = itemView.findViewById(R.id.tv_movie_name_list_item);
-            poster = itemView.findViewById(R.id.iv_movie_poster_list_item);
+            movie_Title = itemView.findViewById(R.id.movie_item_2_title);
+            poster = itemView.findViewById(R.id.movie_item_2_picture);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,6 +70,5 @@ public class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.MyViewHolder
             });
         }
     }
-
 }
 
