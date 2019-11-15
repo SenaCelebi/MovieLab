@@ -33,6 +33,8 @@ import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity {
 
+    //Home
+
     private List<Slidep> slideList;
     private ViewPager viewPager;
     private TabLayout indicator;
