@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    android:layout_width ="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    >
+
+    <EditTextPreference
+        android:title        ="@string/preference_name_surname"
+        android:key          ="name_surname"
+        android:defaultValue ="@string/preference_name_surname"
+        android:inputType    ="text"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title        ="@string/preference_email"
+        android:key          ="email"
+        android:defaultValue ="E-mail"
+        android:inputType    ="text"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+    <EditTextPreference
+        android:title        ="@string/preference_password"
+        android:key          ="password"
+        android:defaultValue ="12345"
+        android:inputType    ="text"
+        android:singleLine   ="true">
+    </EditTextPreference>
+
+
+    <SwitchPreference
+        android:title="@string/preference_favorities_list"
+        android:key="FavoritesListEnabled"
+        android:defaultValue="true"
+        />
+
+    <SwitchPreference
+        android:title="@string/preference_watch_list"
+        android:key="WatchListEnabled"
+        android:defaultValue="true"
+        />
+
+</PreferenceScreen>

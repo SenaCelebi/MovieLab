@@ -8,7 +8,7 @@
     <string name="nav_discuss">Yorumlar</string>
     <string name="nav_favorites">Favoriler</string>
     <string name="nav_profile">Profil</string>
-    <string name="nav_watch_list">İzleme Listesi</string>
+    <string name="nav_watch_list">İzlenecekler Listesi</string>
     <string name="btn_login">Giriş Yap</string>
     <string name="hint_password">Şifre</string>
     <string name="register_detail_if_you_don_t_have_a_account">Hesabın yok mu?</string>
@@ -27,4 +27,10 @@
     <string name="my_watchlist">İzlenecekler Listem</string>
     <string name="let_s_discuss">Haydi sen de yorum yap!</string>
     <string name="top_rated">En Yüksek Puan Alanlar</string>
+    <string name="settings_over_flow">Ayarlar</string>
+    <string name="preference_name_surname">İsim ve Soyisim</string>
+    <string name="preference_email">E-mail</string>
+    <string name="preference_password">Şifre</string>
+    <string name="preference_favorities_list">Favoriler Listesini Aktive Et</string>
+    <string name="preference_watch_list">İzlenecekler Listesini Aktive Et</string>
 </resources>

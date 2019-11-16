@@ -3,6 +3,8 @@ package com.example.scele.movielab;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.scele.movielab.Adapters.MovieAdaptor;
 import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
@@ -106,18 +109,25 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SessionManager sm = new SessionManager(this);
-        sm.logout();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-        return super.onOptionsItemSelected(item);
 
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(SearchActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
+        }
+
+        else {
+            SessionManager sm = new SessionManager(this);
+            sm.logout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return super.onOptionsItemSelected(item);
+        }
     }
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+
 
     @Override
     public void onMovieClick(Movie movie, ImageView moviePoster) {

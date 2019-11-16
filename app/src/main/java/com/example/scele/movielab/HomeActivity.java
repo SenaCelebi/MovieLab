@@ -1,9 +1,12 @@
 package com.example.scele.movielab;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
@@ -59,6 +62,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         getSupportActionBar().setLogo(R.drawable.logoaction);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
 
 
@@ -166,17 +170,23 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SessionManager sm = new SessionManager(this);
-        sm.logout();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-        return super.onOptionsItemSelected(item);
 
-    }
-    @Override
-    public void onBackPressed() {
-        return;
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
+        }
+
+        else {
+            SessionManager sm = new SessionManager(this);
+            sm.logout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 }

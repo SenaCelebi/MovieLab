@@ -103,18 +103,25 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SessionManager sm = new SessionManager(this);
-        sm.logout();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-        return super.onOptionsItemSelected(item);
 
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(DiscussionActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
+        }
+
+        else {
+            SessionManager sm = new SessionManager(this);
+            sm.logout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return super.onOptionsItemSelected(item);
+        }
     }
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+
 
     @Override
     public void onMovieClick(Movie movie, ImageView moviePoster) {

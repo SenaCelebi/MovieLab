@@ -102,17 +102,23 @@ public class FavoritesActivity extends AppCompatActivity implements MovieItemCli
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SessionManager sm = new SessionManager(this);
-        sm.logout();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-        return super.onOptionsItemSelected(item);
 
-    }
-    @Override
-    public void onBackPressed() {
-        return;
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(FavoritesActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
+        }
+
+        else {
+            SessionManager sm = new SessionManager(this);
+            sm.logout();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
