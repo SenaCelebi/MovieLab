@@ -1,8 +1,10 @@
 package com.example.scele.movielab;
 
 import android.content.Intent;
+import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
+import com.example.scele.movielab.Fragments.TopRatedFragment;
+import com.example.scele.movielab.Fragments.WatchListFragment;
 
 public class WatchListActivity extends AppCompatActivity {
 
@@ -68,7 +72,32 @@ public class WatchListActivity extends AppCompatActivity {
         });
 
 
+        //Ikıncı navigation bar icin fragmentlarla olusturulan
+        BottomNavigationView bottomNavigationViewUp = findViewById(R.id.up_navigation_bar);
+        bottomNavigationViewUp.setOnNavigationItemSelectedListener(navListener);
+
+
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            PreferenceFragment fragment = null;
+            switch (menuItem.getItemId()){
+                case R.id.up_nav_most_rated:
+                    fragment = new TopRatedFragment();
+                    break;
+                case R.id.up_nav_watchlist:
+                    fragment = new WatchListFragment();
+                    break;
+            }
+            //
+            // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_up,fragment).commit();
+            return true;
+        }
+    };
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
