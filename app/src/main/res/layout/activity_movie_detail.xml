@@ -63,20 +63,20 @@
 
         <TextView
             android:id="@+id/description_Movie_Detail"
-            android:layout_width="0dp"
+            style="@style/textInputHintStyle"
+            android:layout_width="318dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="8dp"
             android:text="@string/detail_movie_descr"
+            android:textColor="@color/colorGrey1"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster_activity-movie_detail"
-            style="@style/textInputHintStyle"
-            android:textSize="14sp"
-            android:textColor="@color/colorGrey1"
-            android:lineSpacingExtra="8dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster_activity-movie_detail" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton_detail_activity"

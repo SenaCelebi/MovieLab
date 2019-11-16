@@ -8,7 +8,7 @@
     <string name="nav_discuss">Yorumlar</string>
     <string name="nav_favorites">Favoriler</string>
     <string name="nav_profile">Profil</string>
-    <string name="nav_watch_list">İzlenecekler Listesi</string>
+    <string name="nav_watch_list">İzlenecekler</string>
     <string name="btn_login">Giriş Yap</string>
     <string name="hint_password">Şifre</string>
     <string name="register_detail_if_you_don_t_have_a_account">Hesabın yok mu?</string>
