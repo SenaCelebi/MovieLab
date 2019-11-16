@@ -27,15 +27,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.design.widget.TabLayout
-                app:tabGravity="center"
                 android:id="@+id/indicator"
-                app:tabBackground="@drawable/selector_indi"
-                app:tabIndicatorHeight="0dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="53dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/slider_pager">
+                app:layout_constraintTop_toBottomOf="@+id/slider_pager"
+                app:tabBackground="@drawable/selector_indi"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp">
 
 
             </android.support.design.widget.TabLayout>

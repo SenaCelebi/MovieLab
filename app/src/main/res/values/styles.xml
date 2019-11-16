@@ -12,7 +12,7 @@
     <style name="textInputHintStyle" parent="TextAppearance.AppCompat.Medium.Inverse">
     <item name="android:textColorHint">@color/colorGrey1</item>
     <item name="android:textColor">@color/colorGrey2</item>
-    <item name="android:textSize">17sp</item>
+    <item name="android:textSize">16sp</item>
 
 </style>
 

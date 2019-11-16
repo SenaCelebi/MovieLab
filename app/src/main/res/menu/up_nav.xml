@@ -10,6 +10,7 @@
     <item
         android:id="@+id/up_nav_most_rated"
         android:title="@string/top_rated"
+        
 
         />
 
