@@ -7,13 +7,17 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,21 +25,37 @@ import com.example.scele.movielab.Adapters.MovieAdaptor;
 import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
 import com.example.scele.movielab.Models.Movie;
+import com.example.scele.movielab.Models.NetworksUtils;
+import com.example.scele.movielab.Models.mMovie;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity implements MovieItemClickListener{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class SearchActivity extends AppCompatActivity{
 
     BottomNavigationView navigationView;
     Intent intent;
     RecyclerView moviesRecycleView;
     Context context = this;
 
+    EditText ed_search;
+
+
+    private ResponseMovie responseMovie;
+    private mMovie mMovie;
+    private MovieAdaptorForItem movieAdaptor;
+    private List<mMovie> movieList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        //Toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logoaction);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -45,23 +65,6 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
-
-
-        //For Recycle View
-        List<Movie> movieList = new ArrayList<>();
-        movieList.add(new Movie("Logan",R.drawable.poster1,R.drawable.bk1));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2,R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-
-        moviesRecycleView = findViewById(R.id.recycle_view_search);
-        MovieAdaptorForItem movieAdaptor = new MovieAdaptorForItem(context, movieList,this);
-        moviesRecycleView.setAdapter(movieAdaptor);
-        moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -97,7 +100,69 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
                 return false;
             }
         });
+
+
+
+
+        ed_search = findViewById(R.id.search_bar);
+        responseMovie = new ResponseMovie();
+        mMovie = new mMovie();
+
+
+        movieList = new ArrayList<>();
+        moviesRecycleView = findViewById(R.id.recycle_view_search);
+        movieAdaptor = new MovieAdaptorForItem(this,movieList);
+        moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        moviesRecycleView.setAdapter(movieAdaptor);
+        movieAdaptor.notifyDataSetChanged();
+
+        SearchMovies();
+        showMovie();
     }
+
+
+
+    private void SearchMovies() {
+        ed_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void showMovie(){
+
+        RestApi restApi = NetworksUtils.getRetrofit().create(RestApi.class);
+        Call<ResponseMovie> call = restApi.getMovie(Constant.API_KEY,Constant.LANGUAGE,ed_search.getText().toString());
+        call.enqueue(new Callback<ResponseMovie>() {
+            @Override
+            public void onResponse(Call<ResponseMovie> call, Response<ResponseMovie> response) {
+
+                List<mMovie> moviesList = response.body().results;
+                moviesRecycleView.setAdapter(new MovieAdaptorForItem(context,moviesList));
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMovie> call, Throwable t) {
+
+
+            }
+        });
+    }
+
 
 
     @Override
@@ -129,16 +194,4 @@ public class SearchActivity extends AppCompatActivity implements MovieItemClickL
     }
 
 
-    @Override
-    public void onMovieClick(Movie movie, ImageView moviePoster) {
-
-        Intent intent = new Intent(this, MovieDetailActivity.class);
-        intent.putExtra("title",movie.getTitle());
-        intent.putExtra("imgURL",movie.getThumbnail());
-        intent.putExtra("imgBack",movie.getPhotoBack());
-
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SearchActivity.this,
-                moviePoster,"sharedName");
-        startActivity(intent,options.toBundle());
-    }
 }

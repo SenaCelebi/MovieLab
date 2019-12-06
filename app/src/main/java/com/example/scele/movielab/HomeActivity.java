@@ -51,19 +51,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeActivity extends AppCompatActivity implements MovieItemClickListener {
+public class HomeActivity extends AppCompatActivity implements MovieItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     //Home
 
     private List<Slidep> slideList;
     private ViewPager viewPager;
     private TabLayout indicator;
+
     RecyclerView moviesRecycleView, upcomingMoviesRecycleView;
     private List<Movie> MovieList;
     private SwipeRefreshLayout refreshLayout;
 
-    Context context = this;
 
+   // RecyclerView moviesRecycleView;
+    Context context = this;
     BottomNavigationView navigationView;
     Intent intent = null;
     MovieAdaptorForItem mMovieAdaptor;
@@ -73,7 +75,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         //Logo in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logoaction);
@@ -94,7 +95,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
         indicator.setupWithViewPager(viewPager,true);
-
 
         //Bottom Navigation Bar Control
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_bar);
@@ -131,6 +131,20 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
 
         //For Recycle View
+
+
+
+
+
+
+        List<Movie> movieList = new ArrayList<>();
+        movieList.add(new Movie("Logan",R.drawable.poster1,R.drawable.bk1));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2,R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+
+
         moviesRecycleView = findViewById(R.id.recyclerView2);
         moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -213,6 +227,11 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,
                 moviePoster,"sharedName");
         startActivity(intent,options.toBundle());
+
+    }
+
+    @Override
+    public void onRefresh() {
 
     }
 
