@@ -53,7 +53,6 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements MovieItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    //Home
 
     private List<Slidep> slideList;
     private ViewPager viewPager;
@@ -64,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     private SwipeRefreshLayout refreshLayout;
 
 
-   // RecyclerView moviesRecycleView;
+
     Context context = this;
     BottomNavigationView navigationView;
     Intent intent = null;
@@ -131,19 +130,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
 
         //For Recycle View
-
-
-
-
-
-
-        List<Movie> movieList = new ArrayList<>();
-        movieList.add(new Movie("Logan",R.drawable.poster1,R.drawable.bk1));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2,R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-
 
         moviesRecycleView = findViewById(R.id.recyclerView2);
         moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
