@@ -1,9 +1,15 @@
 package com.example.scele.movielab.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Movie implements Serializable {
 
+
+    //********************************************************************************//
     String title;
     String primaryInfo;
     String ratings;

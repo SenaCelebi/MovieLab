@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootCardView"
     android:layout_width="108dp"
-    android:layout_height="190dp"
+    android:layout_height="230dp"
     android:background="@color/colorPrimaryDark"
     app:cardCornerRadius="@dimen/card_movie_radius">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="230dp"
         android:orientation="vertical"
         android:background="@color/colorPrimaryDark"
         >
@@ -23,11 +23,12 @@
             android:layout_gravity="center"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:id="@+id/tv_movie_name_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="@string/movie_name"
             android:textAlignment="center"
             android:textColor="#ffff"
@@ -41,7 +42,7 @@
             android:layout_gravity="center"
             android:text="@string/rate"
             android:textAlignment="center"
-            android:textColor="#ffff"
+            android:textColor="@color/colorAccent"
 
             />
 
