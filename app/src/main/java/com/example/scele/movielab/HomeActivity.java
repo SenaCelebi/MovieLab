@@ -12,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,17 +38,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class HomeActivity extends AppCompatActivity implements MovieItemClickListener {
+public class HomeActivity extends AppCompatActivity implements MovieItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     //Home
 
     private List<Slidep> slideList;
     private ViewPager viewPager;
     private TabLayout indicator;
+
     RecyclerView moviesRecycleView;
-
     Context context = this;
-
     BottomNavigationView navigationView;
     Intent intent = null;
 
@@ -56,15 +56,11 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         //Logo in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logoaction);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
-
 
         //Slider in top of the page
         viewPager = findViewById(R.id.slider_pager);
@@ -79,7 +75,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
         indicator.setupWithViewPager(viewPager,true);
-
 
         //Bottom Navigation Bar Control
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_bar);
@@ -115,6 +110,11 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
 
         //For Recycle View
+
+
+
+
+
         List<Movie> movieList = new ArrayList<>();
         movieList.add(new Movie("Logan",R.drawable.poster1,R.drawable.bk1));
         movieList.add(new Movie("Life of Brian",R.drawable.poster2,R.drawable.bk2));
@@ -140,6 +140,11 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,
                 moviePoster,"sharedName");
         startActivity(intent,options.toBundle());
+
+    }
+
+    @Override
+    public void onRefresh() {
 
     }
 
