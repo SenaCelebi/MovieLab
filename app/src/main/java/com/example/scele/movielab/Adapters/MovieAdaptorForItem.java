@@ -47,9 +47,9 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     public void onBindViewHolder(@NonNull MyViewHolder2 myViewHolder2, int i) {
 
        mMovie setMovie = Data.get(i);
-       myViewHolder2.overview.setText(setMovie.overview);
-       myViewHolder2.releaseDate.setText(setMovie.release_date);
-        Glide.with(myViewHolder2.itemView.getContext()).load(Constant.IMAGE+"/"+setMovie.poster_path).into(myViewHolder2.poster);
+       myViewHolder2.overview.setText(setMovie.getOverview());
+       myViewHolder2.releaseDate.setText(setMovie.getReleaseDate());
+        Glide.with(myViewHolder2.itemView.getContext()).load(Constant.IMAGE+"/"+setMovie.getPosterPath()).into(myViewHolder2.poster);
 
     }
 
@@ -83,15 +83,15 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                     if(pos != RecyclerView.NO_POSITION){
                         mMovie clickedDataItem = Data.get(pos);
                         Intent intent = new Intent(context, MovieDetailActivity.class);
-                        intent.putExtra("vote_count",clickedDataItem.vote_count);
-                        intent.putExtra("vote_average",clickedDataItem.vote_average);
-                        intent.putExtra("title",clickedDataItem.title);
-                        intent.putExtra("popularity",clickedDataItem.popularity);
-                        intent.putExtra("poster_path",clickedDataItem.poster_path);
-                        intent.putExtra("original_language",clickedDataItem.original_language);
-                        intent.putExtra("original_title",clickedDataItem.original_title);
-                        intent.putExtra("overview",clickedDataItem.overview);
-                        intent.putExtra("release_date",clickedDataItem.release_date);
+                        intent.putExtra("vote_count",clickedDataItem.getVoteCount());
+                        intent.putExtra("vote_average",clickedDataItem.getVoteAverage());
+                        intent.putExtra("title",clickedDataItem.getTitle());
+                        intent.putExtra("popularity",clickedDataItem.getPopularity());
+                        intent.putExtra("poster_path",clickedDataItem.getPosterPath());
+                        intent.putExtra("original_language",clickedDataItem.getOriginalLanguage());
+                        intent.putExtra("original_title",clickedDataItem.getOriginalTitle());
+                        intent.putExtra("overview",clickedDataItem.getOverview());
+                        intent.putExtra("release_date",clickedDataItem.getReleaseDate());
 
                         context.startActivity(intent);
 
