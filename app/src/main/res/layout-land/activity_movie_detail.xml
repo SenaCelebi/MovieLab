@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            android:src="@drawable/postera"/>
 
         <ImageView
             android:id="@+id/imageView5"
@@ -33,7 +33,7 @@
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent" />
         <ImageView
-            android:id="@+id/iv_poster_activity-movie_detail"
+            android:id="@+id/iv_poster_activity_movie_detail"
             android:layout_width="100dp"
             android:layout_height="140dp"
             android:layout_marginStart="24dp"
@@ -57,8 +57,23 @@
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster_activity-movie_detail"
+            app:layout_constraintStart_toEndOf="@+id/iv_poster_activity_movie_detail"
             app:layout_constraintTop_toBottomOf="@+id/detail_Movie_Background" />
+        <TextView
+            android:id="@+id/release_date_Movie_Detail"
+            style="@style/textInputHintStyle"
+            android:textSize="12sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textColor="@color/colorGrey1"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_poster_activity_movie_detail"
+            app:layout_constraintTop_toBottomOf="@+id/title_Movie_Detail" />
 
         <TextView
             android:id="@+id/description_Movie_Detail"
@@ -72,11 +87,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster_activity-movie_detail"
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster_activity_movie_detail"
             style="@style/textInputHintStyle"
             android:textSize="14sp"
             android:textColor="@color/colorGrey1"
             android:lineSpacingExtra="8dp"/>
+
+        <TextView
+            android:id="@+id/trailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trailers"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerViewDetail"
+            app:layout_constraintTop_toBottomOf="@+id/description_Movie_Detail"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="68dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="15sp"
+            android:textColor="@color/colorAccent"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trailer"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton_detail_activity"

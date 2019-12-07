@@ -65,6 +65,9 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     Intent intent = null;
     MovieAdaptorForItem mMovieAdaptor;
 
+    private static String image1, image2, image3, image4;
+    private static String name1, name2, name3, name4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,20 +79,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-        //Slider in top of the page
-        viewPager = findViewById(R.id.slider_pager);
-        indicator = findViewById(R.id.indicator);
-        slideList = new ArrayList<>();
-        slideList.add(new Slidep(R.drawable.image1,"Movie Title \n details"));
-        slideList.add(new Slidep(R.drawable.image2,"Movie Title \n details"));
-        slideList.add(new Slidep(R.drawable.image1,"Movie Title \n details"));
-        slideList.add(new Slidep(R.drawable.image2,"Movie Title \n details"));
-        SliderPageAdapter sliderPageAdapter = new SliderPageAdapter(context,slideList);
-        viewPager.setAdapter(sliderPageAdapter);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
-        indicator.setupWithViewPager(viewPager,true);
 
         //Bottom Navigation Bar Control
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation_bar);
@@ -135,6 +124,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
         loadJSON();
         loadJSONforUpcoming();
+
     }
 
    private void loadJSON(){
@@ -168,7 +158,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     }
 
     private void loadJSONforUpcoming(){
-
         Client client = new Client();
         Service apiService = Client.getClient().create(Service.class);
         Call<MovieResponse> call = apiService.getUpcomingMovies(Constant.API_KEY);
@@ -176,10 +165,31 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-
                 List<mMovie> movies = response.body().getResults();
-
                 upcomingMoviesRecycleView.setAdapter(new mMovieAdaptor(context,movies));
+                image1 = movies.get(0).getPosterPath();
+                image2 = movies.get(1).getPosterPath();
+                image3 = movies.get(2).getPosterPath();
+                image4 = movies.get(3).getPosterPath();
+                name1 = movies.get(0).getOriginalTitle();
+                name2 = movies.get(1).getOriginalTitle();
+                name3 = movies.get(2).getOriginalTitle();
+                name4 = movies.get(3).getOriginalTitle();
+
+                //Slider in top of the page
+                viewPager = findViewById(R.id.slider_pager);
+                indicator = findViewById(R.id.indicator);
+                slideList = new ArrayList<>();
+                slideList.add(new Slidep(image1,name1));
+                slideList.add(new Slidep(image2,name2));
+                slideList.add(new Slidep(image3,name3));
+                slideList.add(new Slidep(image4,name4));
+                Log.v("melo", slideList.get(0).getTitle());
+                SliderPageAdapter sliderPageAdapter = new SliderPageAdapter(context,slideList);
+                viewPager.setAdapter(sliderPageAdapter);
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
+                indicator.setupWithViewPager(viewPager,true);
 
             }
             @Override

@@ -36,4 +36,5 @@
     <string name="now_playing_movies">Vizyondakiler</string>
     <string name="upcoming_movies">Yakında Vizyonda</string>
     <string name="voteCount">Oy Sayısı</string>
+    <string name="trailers">Tanıtımlar</string>
 </resources>

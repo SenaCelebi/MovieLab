@@ -23,23 +23,6 @@ public class mMovie implements Serializable {
     private Integer id;
     @SerializedName("original_title")
     private String originalTitle;
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
-    }
-
-    public String getBaseImageURL() {
-        return baseImageURL;
-    }
-
-    public void setBaseImageURL(String baseImageURL) {
-        this.baseImageURL = baseImageURL;
-    }
-
     @SerializedName("original_language")
     private String originalLanguage;
     @SerializedName("title")
@@ -70,7 +53,6 @@ public class mMovie implements Serializable {
         this.voteCount = voteCount;
         this.video = video;
         this.voteAverage = voteAverage;
-
     }
 
     public mMovie(String posterPath, Boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id, String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity, Integer voteCount, Boolean video, Double voteAverage, String baseImageURL) {
@@ -93,6 +75,22 @@ public class mMovie implements Serializable {
 
     public mMovie( ) {
 
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getBaseImageURL() {
+        return baseImageURL;
+    }
+
+    public void setBaseImageURL(String baseImageURL) {
+        this.baseImageURL = baseImageURL;
     }
 
     String baseImageURL = "https://image.tmdb.org/t/p/w500/";

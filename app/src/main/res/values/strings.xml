@@ -41,6 +41,7 @@
     <string name="now_playing_movies">Now Playing Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="voteCount">Vote Count</string>
+    <string name="trailers">Trailers</string>
 
 
 </resources>

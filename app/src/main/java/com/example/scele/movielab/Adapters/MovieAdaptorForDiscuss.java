@@ -60,6 +60,7 @@ public class MovieAdaptorForDiscuss extends RecyclerView.Adapter<MovieAdaptorFor
                 intent.putExtra("movie_description", Data.get(i).getOverview());
                 intent.putExtra("movie_rate", Data.get(i).getVoteAverage().toString());
                 intent.putExtra("movie_poster", Data.get(i).getPosterPath());
+                intent.putExtra("id", Data.get(i).getId());
                 context.startActivity(intent);
             }
         });

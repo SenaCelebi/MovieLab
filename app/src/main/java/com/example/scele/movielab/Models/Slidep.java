@@ -2,19 +2,19 @@ package com.example.scele.movielab.Models;
 
 public class Slidep {
 
-    private int image;
+    private String image;
     private  String title;
 
-    public Slidep(int image, String title) {
+    public Slidep(String image, String title) {
         this.image = image;
         this.title = title;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
