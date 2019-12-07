@@ -23,11 +23,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         initializeViews();
+
+        //Logo in the toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logoaction);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     void initializeViews(){
 
-        userRating = findViewById(R.id.rating_Movie_Detail);
         releaseDate = findViewById(R.id.release_date_Movie_Detail);
         floatingActionButton = findViewById(R.id.floatingActionButton_detail_activity);
         MovieImage = findViewById(R.id.iv_poster_activity_movie_detail);
@@ -36,8 +41,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         desc_movie = findViewById(R.id.description_Movie_Detail);
 
         if (getIntent().hasExtra("movie_title")){
-            String imageName = getIntent().getStringExtra("movie_title");
-            title_movie.setText(imageName);
+            String name = getIntent().getStringExtra("movie_title");
+            title_movie.setText(name);
+            String rate = getIntent().getStringExtra("movie_rate");
+            releaseDate.setText(rate);
+            desc_movie.setText(getIntent().getStringExtra("movie_description"));
+            String path = getIntent().getStringExtra("movie_poster");
+            Glide.with(getApplicationContext()).load("https://image.tmdb.org/t/p/w500/"+path).into(MovieImage);
         }
 
     }

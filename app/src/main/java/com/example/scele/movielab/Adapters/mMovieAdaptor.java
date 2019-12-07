@@ -57,6 +57,9 @@ public class mMovieAdaptor extends RecyclerView.Adapter<mMovieAdaptor.MyViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(context, MovieDetailActivity.class);
                 intent.putExtra("movie_title", Data.get(i).getOriginalTitle());
+                intent.putExtra("movie_description", Data.get(i).getOverview());
+                intent.putExtra("movie_rate", Data.get(i).getVoteAverage().toString());
+                intent.putExtra("movie_poster", Data.get(i).getPosterPath());
                 context.startActivity(intent);
             }
         });
