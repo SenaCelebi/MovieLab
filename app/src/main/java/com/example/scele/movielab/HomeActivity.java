@@ -59,10 +59,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     private TabLayout indicator;
 
     RecyclerView moviesRecycleView, upcomingMoviesRecycleView;
-    private List<Movie> MovieList;
-    private SwipeRefreshLayout refreshLayout;
-
-
 
     Context context = this;
     BottomNavigationView navigationView;

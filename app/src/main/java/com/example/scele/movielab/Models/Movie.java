@@ -8,8 +8,6 @@ import java.util.List;
 
 public class Movie {
 
-
-    //********************************************************************************//
     String title;
     String primaryInfo;
     String ratings;

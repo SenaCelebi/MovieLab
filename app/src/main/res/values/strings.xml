@@ -40,6 +40,7 @@
     <string name="preference_watch_list">Activate the Watch List</string>
     <string name="now_playing_movies">Now Playing Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="voteCount">Vote Count</string>
 
 
 </resources>

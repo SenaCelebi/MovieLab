@@ -38,28 +38,27 @@ app:cardCornerRadius="5dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/movie_name_discuss_item"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:layout_marginTop="5dp"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:text="@string/movie_name"
-                    android:textSize="16sp"
                     android:textColor="@color/colorGrey1"
-                    />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_gotit_price_users_item"
+                    android:id="@+id/movie_year_discussion_item"
                     android:maxLines="1"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:text="@string/release_year"
                     android:textColor="@color/colorGrey1"
                     android:layout_marginStart="9dp"
@@ -70,7 +69,7 @@ app:cardCornerRadius="5dp"
             </LinearLayout>
 
             <CheckBox
-                android:layout_marginHorizontal="60dp"
+                android:layout_marginStart="60dp"
                 android:id="@+id/check"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
@@ -85,12 +84,13 @@ app:cardCornerRadius="5dp"
         <TextView
             android:layout_marginTop="10dp"
             android:layout_marginStart="9dp"
-            android:id="@+id/description_item_movie_2"
+            android:id="@+id/movie_description_discussion_item"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="@string/detail_movie_descr"
             style="@style/textInputHintStyle"
             android:textSize="12sp"
+            android:maxLines="6"
             android:textColor="@color/colorGrey1"
             android:lineSpacingExtra="3dp"/>
 

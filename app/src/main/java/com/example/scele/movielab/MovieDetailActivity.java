@@ -23,8 +23,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         initializeViews();
-
-
     }
 
     void initializeViews(){
@@ -37,34 +35,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         title_movie = findViewById(R.id.title_Movie_Detail);
         desc_movie = findViewById(R.id.description_Movie_Detail);
 
-        Intent thatStartedInthisActivity = getIntent();
-        if (thatStartedInthisActivity.hasExtra("original_title")){
-
-            String thubnail = getIntent().getExtras().getString("poster_path");
-            String movieName = getIntent().getExtras().getString("original_title");
-            String snopsis = getIntent().getExtras().getString("overview");
-            String rating = getIntent().getExtras().getString("vote_average");
-            String dateOfRelease = getIntent().getExtras().getString("release_date");
-
-            floatingActionButton.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_ani));
-            Glide.with(this).load(thubnail).into(MovieImage);
-            Glide.with(this).load(thubnail).into(movieBackground);
-            title_movie.setText(movieName);
-            getSupportActionBar().setTitle(movieName);
-            userRating.setText(rating);
-            desc_movie.setText(snopsis);
-            releaseDate.setText(dateOfRelease);
-
-        }else{
-            Toast.makeText(this, "Movie detail api error", Toast.LENGTH_SHORT).show();
+        if (getIntent().hasExtra("movie_title")){
+            String imageName = getIntent().getStringExtra("movie_title");
+            title_movie.setText(imageName);
         }
-
-
-
-
-
-
-
 
     }
 }

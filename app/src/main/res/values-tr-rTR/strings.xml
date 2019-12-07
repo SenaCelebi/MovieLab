@@ -34,5 +34,6 @@
     <string name="preference_favorities_list">Favoriler Listesini Aktive Et</string>
     <string name="preference_watch_list">İzlenecekler Listesini Aktive Et</string>
     <string name="now_playing_movies">Vizyondakiler</string>
-    <string name="upcoming_movies">Yakında Vizyonda...</string>
+    <string name="upcoming_movies">Yakında Vizyonda</string>
+    <string name="voteCount">Oy Sayısı</string>
 </resources>

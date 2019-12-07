@@ -80,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="@string/upcoming_movies"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +89,7 @@
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/upcoming_movies_refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:layout_marginTop="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
@@ -98,7 +99,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/upcoming_movies_recycle_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="250dp" />
 
 
             </android.support.v4.widget.SwipeRefreshLayout>

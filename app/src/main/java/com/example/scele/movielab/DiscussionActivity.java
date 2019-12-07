@@ -9,18 +9,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.scele.movielab.API.Client;
+import com.example.scele.movielab.API.Service;
 import com.example.scele.movielab.Adapters.MovieAdaptorForDiscuss;
 import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
+import com.example.scele.movielab.Adapters.mMovieAdaptor;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
 import com.example.scele.movielab.Models.Movie;
+import com.example.scele.movielab.Models.mMovie;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DiscussionActivity extends AppCompatActivity implements MovieItemClickListener {
 
@@ -44,17 +55,16 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
         menuItem.setChecked(true);
 
         //For Recycle View
-        List<Movie> movieList = new ArrayList<>();
+       /* List<Movie> movieList = new ArrayList<>();
         movieList.add(new Movie("Logan",R.drawable.poster1,R.drawable.bk1));
         movieList.add(new Movie("Life of Brian",R.drawable.poster2,R.drawable.bk2));
         movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
         movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
-        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));
+        movieList.add(new Movie("Life of Brian",R.drawable.poster2, R.drawable.bk2));*/
 
         moviesRecycleView = findViewById(R.id.recycle_view_discussion);
-        MovieAdaptorForDiscuss movieAdaptor = new MovieAdaptorForDiscuss(context, movieList,this);
-        moviesRecycleView.setAdapter(movieAdaptor);
         moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        loadJSONDiscussion();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,6 +102,34 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
             }
         });
 
+
+    }
+    private void loadJSONDiscussion(){
+
+        Client client = new Client();
+        Service apiService = Client.getClient().create(Service.class);
+        Call<MovieResponse> call = apiService.getPopularMovies(Constant.API_KEY);
+        call.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+
+                List<mMovie> movies = response.body().getResults();
+
+                moviesRecycleView.setAdapter(new MovieAdaptorForDiscuss(context,movies));
+
+            }
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+
+                if(t instanceof IOException){
+                    Log.i("asd", t.getMessage());
+                }
+                else{
+                    Log.i("asd", "NOT IO");
+                }
+                Toast.makeText(DiscussionActivity.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
     @Override
