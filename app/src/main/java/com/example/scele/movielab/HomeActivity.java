@@ -37,6 +37,7 @@ import com.example.scele.movielab.Adapters.mMovieAdaptor;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
 import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.Slidep;
+import com.example.scele.movielab.Models.Trailer;
 import com.example.scele.movielab.Models.mMovie;
 
 import java.io.IOError;
@@ -53,20 +54,20 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements MovieItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-
     private List<Slidep> slideList;
     private ViewPager viewPager;
     private TabLayout indicator;
 
+    final static List<String> videoKeys = new ArrayList<>();
     RecyclerView moviesRecycleView, upcomingMoviesRecycleView;
 
     Context context = this;
     BottomNavigationView navigationView;
     Intent intent = null;
-    MovieAdaptorForItem mMovieAdaptor;
 
     private static String image1, image2, image3, image4;
     private static String name1, name2, name3, name4;
+    private static int id1, id2, id3, id4;
 
 
     @Override
@@ -115,7 +116,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
 
         //For Recycle View
-
         moviesRecycleView = findViewById(R.id.recyclerView2);
         moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -167,6 +167,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 List<mMovie> movies = response.body().getResults();
                 upcomingMoviesRecycleView.setAdapter(new mMovieAdaptor(context,movies));
+                //Slider in top of the page
                 image1 = movies.get(0).getPosterPath();
                 image2 = movies.get(1).getPosterPath();
                 image3 = movies.get(2).getPosterPath();
@@ -175,17 +176,24 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                 name2 = movies.get(1).getOriginalTitle();
                 name3 = movies.get(2).getOriginalTitle();
                 name4 = movies.get(3).getOriginalTitle();
+                id1 = movies.get(0).getId();
+                id2 = movies.get(1).getId();
+                id3 = movies.get(2).getId();
+                id4 = movies.get(3).getId();
+                loadJSONTrailer(id1);
+                loadJSONTrailer(id2);
+                loadJSONTrailer(id3);
+                loadJSONTrailer(id4);
 
-                //Slider in top of the page
                 viewPager = findViewById(R.id.slider_pager);
                 indicator = findViewById(R.id.indicator);
                 slideList = new ArrayList<>();
-                slideList.add(new Slidep(image1,name1));
-                slideList.add(new Slidep(image2,name2));
-                slideList.add(new Slidep(image3,name3));
-                slideList.add(new Slidep(image4,name4));
-                Log.v("melo", slideList.get(0).getTitle());
-                SliderPageAdapter sliderPageAdapter = new SliderPageAdapter(context,slideList);
+                slideList.add(new Slidep(image1,name1, id1));
+                slideList.add(new Slidep(image2,name2, id2));
+                slideList.add(new Slidep(image3,name3, id3));
+                slideList.add(new Slidep(image4,name4, id4));
+
+                SliderPageAdapter sliderPageAdapter = new SliderPageAdapter(context,slideList, videoKeys);
                 viewPager.setAdapter(sliderPageAdapter);
                 Timer timer = new Timer();
                 timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
@@ -205,6 +213,33 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
             }
         });
 
+    }
+
+    // To show trailer in slider
+    private void loadJSONTrailer(int movie_id){
+        try{
+            Client Client = new Client();
+            Service apiService = Client.getClient().create(Service.class);
+            Call<TrailerResponse> call = apiService.getMovieTrailer(movie_id, Constant.API_KEY);
+            call.enqueue(new Callback<TrailerResponse>() {
+                @Override
+                public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                    List<Trailer> trailer = response.body().getResults();
+                    String videoID;
+                    videoID = trailer.get(0).getKey();
+                    videoKeys.add(videoID);
+                }
+
+                @Override
+                public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                    Log.d("Error", t.getMessage());
+                }
+            });
+
+        }catch (Exception e){
+            Log.d("Error", e.getMessage());
+
+        }
     }
 
 
