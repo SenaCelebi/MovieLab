@@ -126,7 +126,8 @@ public class SearchActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                movieList.clear();
+                showMovie();
             }
 
             @Override
