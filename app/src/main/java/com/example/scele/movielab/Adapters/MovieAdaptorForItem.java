@@ -3,6 +3,7 @@ package com.example.scele.movielab.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,13 +46,27 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder2 myViewHolder2, int i) {
+    public void onBindViewHolder(@NonNull MyViewHolder2 myViewHolder2,final int i) {
 
         myViewHolder2.movie_Title.setText(Data.get(i).getOriginalTitle());
-        myViewHolder2.releaseDate.setText(String.valueOf(Data.get(i).getReleaseDate()));
+        String vote = Double.toString(Data.get(i).getVoteAverage());
+        myViewHolder2.releaseDate.setText(vote);
 
         Log.v("control", "https://image.tmdb.org/t/p/w500/"+Data.get(i).getPosterPath());
         Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+Data.get(i).getPosterPath()).into(myViewHolder2.poster);
+
+        myViewHolder2.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("movie_title", Data.get(i).getOriginalTitle());
+                intent.putExtra("movie_description", Data.get(i).getOverview());
+                intent.putExtra("movie_rate", Data.get(i).getVoteAverage().toString());
+                intent.putExtra("movie_poster", Data.get(i).getPosterPath());
+                intent.putExtra("id", Data.get(i).getId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -66,37 +81,14 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
 
         private TextView movie_Title, overview, releaseDate;
         private ImageView poster;
-
-
+        private CardView cardView;
 
         public MyViewHolder2(@NonNull View itemView) {
             super(itemView);
             movie_Title = itemView.findViewById(R.id.tv_movie_name_comments_item);
             poster = itemView.findViewById(R.id.poster_movie_item_comments);
             releaseDate = itemView.findViewById(R.id.tv_release_date_comments_item);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        mMovie clickedDataItem = Data.get(pos);
-                        Intent intent = new Intent(context, MovieDetailActivity.class);
-                        intent.putExtra("vote_count",clickedDataItem.getVoteCount());
-                        intent.putExtra("vote_average",clickedDataItem.getVoteAverage());
-                        intent.putExtra("title",clickedDataItem.getTitle());
-                        intent.putExtra("popularity",clickedDataItem.getPopularity());
-                        intent.putExtra("poster_path",clickedDataItem.getPosterPath());
-                        intent.putExtra("original_language",clickedDataItem.getOriginalLanguage());
-                        intent.putExtra("original_title",clickedDataItem.getOriginalTitle());
-                        intent.putExtra("overview",clickedDataItem.getOverview());
-                        intent.putExtra("release_date",clickedDataItem.getReleaseDate());
-
-                        context.startActivity(intent);
-
-                    }
-                }
-            });
+            cardView = itemView.findViewById(R.id.cardView);
 
         }
     }

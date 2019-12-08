@@ -103,17 +103,13 @@ public class SearchActivity extends AppCompatActivity{
         });
 
 
-
-
         ed_search = findViewById(R.id.search_bar);
         responseMovie = new ResponseMovie();
         mMovie = new mMovie();
 
-
         movieList = new ArrayList<>();
         moviesRecycleView = findViewById(R.id.recycle_view_search);
         moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
 
         SearchMovies();
 
@@ -135,7 +131,6 @@ public class SearchActivity extends AppCompatActivity{
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 showMovie();
             }
         });
