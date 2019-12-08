@@ -43,6 +43,7 @@ import com.example.scele.movielab.Models.mMovie;
 import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -59,6 +60,8 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     private TabLayout indicator;
 
     final List<String> videoKeys = new ArrayList<>();
+    HashMap<String, String> hashMap = new HashMap<>();
+
     RecyclerView moviesRecycleView, upcomingMoviesRecycleView;
 
     Context context = this;
@@ -180,13 +183,14 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                 id2 = movies.get(1).getId();
                 id3 = movies.get(2).getId();
                 id4 = movies.get(3).getId();
-                for (int i=0; i<4; i++){
+
+                /*for (int i=0; i<4; i++){
                     loadJSONTrailer(movies.get(i).getId());
-                }
-               /* loadJSONTrailer(id1);
-                loadJSONTrailer(id2);
-                loadJSONTrailer(id3);
-                loadJSONTrailer(id4);*/
+                }*/
+                loadJSONTrailer(name1, id1);
+                loadJSONTrailer(name2,id2);
+                loadJSONTrailer(name3, id3);
+                loadJSONTrailer(name4, id4);
 
                 viewPager = findViewById(R.id.slider_pager);
                 indicator = findViewById(R.id.indicator);
@@ -196,7 +200,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                 slideList.add(new Slidep(image3,name3, id3));
                 slideList.add(new Slidep(image4,name4, id4));
 
-                SliderPageAdapter sliderPageAdapter = new SliderPageAdapter(context,slideList, videoKeys);
+                SliderPageAdapter sliderPageAdapter = new SliderPageAdapter(context,slideList, videoKeys, hashMap);
                 viewPager.setAdapter(sliderPageAdapter);
                 Timer timer = new Timer();
                 timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
@@ -219,7 +223,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     }
 
     // To show trailer in slider
-    private void loadJSONTrailer(int movie_id){
+    private void loadJSONTrailer(final String name, int movie_id){
         try{
             Client Client = new Client();
             Service apiService = Client.getClient().create(Service.class);
@@ -231,6 +235,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                     String videoID;
                     videoID = trailer.get(0).getKey();
                     videoKeys.add(videoID);
+                    hashMap.put(name, videoID);
                 }
 
                 @Override

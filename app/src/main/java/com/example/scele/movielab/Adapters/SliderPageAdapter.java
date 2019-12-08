@@ -25,6 +25,7 @@ import com.example.scele.movielab.Models.Slidep;
 import com.example.scele.movielab.TrailerResponse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,11 +37,14 @@ public class SliderPageAdapter extends PagerAdapter {
     private Context context;
     private List<Slidep> listSlides;
     private List<String> videoKeys;
+    private HashMap<String, String> hashMap;
 
-    public SliderPageAdapter(Context context, List<Slidep> listSlides, List<String> videoKeys) {
+
+    public SliderPageAdapter(Context context, List<Slidep> listSlides, List<String> videoKeys, HashMap<String, String> hashMap) {
         this.context = context;
         this.listSlides = listSlides;
         this.videoKeys = videoKeys;
+        this.hashMap = hashMap;
     }
 
     @NonNull
@@ -62,7 +66,7 @@ public class SliderPageAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 String link;
-                link = videoKeys.get(position);
+                link = hashMap.get(listSlides.get(position).getTitle());
                 Log.v("hey", Integer.toString(position));
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+ link));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
