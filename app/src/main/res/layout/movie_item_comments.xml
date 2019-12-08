@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     android:layout_marginBottom="3dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
@@ -65,17 +65,7 @@
                 android:layout_height="50dp"
 
                 />
-          <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="9dp"
-                android:id="@+id/tv_description_comments_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/detail_movie_descr"
-                style="@style/textInputHintStyle"
-                android:textSize="12sp"
-                android:textColor="@color/colorGrey1"
-                android:lineSpacingExtra="3dp"/>
+
 
 
         </LinearLayout>

@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -111,13 +112,11 @@ public class SearchActivity extends AppCompatActivity{
 
         movieList = new ArrayList<>();
         moviesRecycleView = findViewById(R.id.recycle_view_search);
-        movieAdaptor = new MovieAdaptorForItem(this,movieList);
         moviesRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        moviesRecycleView.setAdapter(movieAdaptor);
-        movieAdaptor.notifyDataSetChanged();
+
 
         SearchMovies();
-        showMovie();
+
     }
 
 
@@ -137,6 +136,7 @@ public class SearchActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
 
+                showMovie();
             }
         });
 
@@ -150,8 +150,21 @@ public class SearchActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<ResponseMovie> call, Response<ResponseMovie> response) {
 
-                List<mMovie> moviesList = response.body().results;
-                moviesRecycleView.setAdapter(new MovieAdaptorForItem(context,moviesList));
+                if(response.isSuccessful()){
+                    responseMovie = response.body();
+
+                    if(response.body().total_results !=0){
+                        for (int i = 0; i<responseMovie.results.size(); i++){
+                            mMovie movie = responseMovie.results.get(i);
+                            movieList.add(movie);
+                        }
+
+                        Log.v("search", movieList.toString());
+                        moviesRecycleView.setAdapter(new MovieAdaptorForItem(context,movieList));
+                    }
+                }
+
+
 
             }
 

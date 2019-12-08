@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +47,14 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder2 myViewHolder2, int i) {
 
-       mMovie setMovie = Data.get(i);
-       myViewHolder2.overview.setText(setMovie.getOverview());
-       myViewHolder2.releaseDate.setText(setMovie.getReleaseDate());
-        Glide.with(myViewHolder2.itemView.getContext()).load(Constant.IMAGE+"/"+setMovie.getPosterPath()).into(myViewHolder2.poster);
+
+        myViewHolder2.movie_Title.setText(Data.get(i).getOriginalTitle());
+
+        myViewHolder2.releaseDate.setText(String.valueOf(Data.get(i).getReleaseDate()));
+
+
+        Log.v("control", "https://image.tmdb.org/t/p/w500/"+Data.get(i).getPosterPath());
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+Data.get(i).getPosterPath()).into(myViewHolder2.poster);
 
     }
 
@@ -73,7 +78,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
             super(itemView);
             movie_Title = itemView.findViewById(R.id.tv_movie_name_comments_item);
             poster = itemView.findViewById(R.id.poster_movie_item_comments);
-            overview = itemView.findViewById(R.id.tv_description_comments_item);
             releaseDate = itemView.findViewById(R.id.tv_release_date_comments_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
