@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     private ViewPager viewPager;
     private TabLayout indicator;
 
-    final static List<String> videoKeys = new ArrayList<>();
+    final List<String> videoKeys = new ArrayList<>();
     RecyclerView moviesRecycleView, upcomingMoviesRecycleView;
 
     Context context = this;
@@ -180,10 +180,13 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                 id2 = movies.get(1).getId();
                 id3 = movies.get(2).getId();
                 id4 = movies.get(3).getId();
-                loadJSONTrailer(id1);
+                for (int i=0; i<4; i++){
+                    loadJSONTrailer(movies.get(i).getId());
+                }
+               /* loadJSONTrailer(id1);
                 loadJSONTrailer(id2);
                 loadJSONTrailer(id3);
-                loadJSONTrailer(id4);
+                loadJSONTrailer(id4);*/
 
                 viewPager = findViewById(R.id.slider_pager);
                 indicator = findViewById(R.id.indicator);

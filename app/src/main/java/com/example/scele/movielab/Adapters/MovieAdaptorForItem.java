@@ -47,18 +47,13 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder2 myViewHolder2, int i) {
 
-
         myViewHolder2.movie_Title.setText(Data.get(i).getOriginalTitle());
-
         myViewHolder2.releaseDate.setText(String.valueOf(Data.get(i).getReleaseDate()));
-
 
         Log.v("control", "https://image.tmdb.org/t/p/w500/"+Data.get(i).getPosterPath());
         Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+Data.get(i).getPosterPath()).into(myViewHolder2.poster);
 
     }
-
-
 
 
     @Override
@@ -102,8 +97,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                     }
                 }
             });
-
-
 
         }
     }

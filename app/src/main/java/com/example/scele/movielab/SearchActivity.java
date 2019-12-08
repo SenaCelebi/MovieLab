@@ -143,7 +143,6 @@ public class SearchActivity extends AppCompatActivity{
     }
 
     private void showMovie(){
-
         RestApi restApi = NetworksUtils.getRetrofit().create(RestApi.class);
         Call<ResponseMovie> call = restApi.getMovie(Constant.API_KEY,Constant.LANGUAGE,ed_search.getText().toString());
         call.enqueue(new Callback<ResponseMovie>() {
@@ -163,20 +162,14 @@ public class SearchActivity extends AppCompatActivity{
                         moviesRecycleView.setAdapter(new MovieAdaptorForItem(context,movieList));
                     }
                 }
-
-
-
             }
 
             @Override
             public void onFailure(Call<ResponseMovie> call, Throwable t) {
 
-
             }
         });
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -187,7 +180,6 @@ public class SearchActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
