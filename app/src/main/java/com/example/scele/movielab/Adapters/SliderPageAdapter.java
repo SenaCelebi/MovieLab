@@ -54,7 +54,6 @@ public class SliderPageAdapter extends PagerAdapter {
         View slideLayout;
         slideLayout = inflater.inflate(R.layout.slide_item,container, false);
 
-
         ImageView slideImage = slideLayout.findViewById(R.id.image_slide);
         TextView slideTitle = slideLayout.findViewById(R.id.title_slide);
         FloatingActionButton fab = slideLayout.findViewById(R.id.floatingActionButton2);

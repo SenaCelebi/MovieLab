@@ -184,9 +184,6 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                 id3 = movies.get(2).getId();
                 id4 = movies.get(3).getId();
 
-                /*for (int i=0; i<4; i++){
-                    loadJSONTrailer(movies.get(i).getId());
-                }*/
                 loadJSONTrailer(name1, id1);
                 loadJSONTrailer(name2,id2);
                 loadJSONTrailer(name3, id3);
