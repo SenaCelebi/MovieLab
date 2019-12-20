@@ -19,14 +19,11 @@ import android.widget.Toast;
 import com.example.scele.movielab.API.Client;
 import com.example.scele.movielab.API.Service;
 import com.example.scele.movielab.Adapters.MovieAdaptorForDiscuss;
-import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
-import com.example.scele.movielab.Adapters.mMovieAdaptor;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
 import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.mMovie;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

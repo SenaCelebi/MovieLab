@@ -1,8 +1,10 @@
 package com.example.scele.movielab.Adapters;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.scele.movielab.Models.Movie;
+import com.example.scele.movielab.Models.mMovie;
 import com.example.scele.movielab.MovieItemClickListener;
 import com.example.scele.movielab.R;
 
@@ -22,13 +26,14 @@ import java.util.List;
 public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyViewHolder> {
 
     Context context;
-    List<Movie> Data;
+    List<mMovie> favoriteList;
     MovieItemClickListener movieItemClickListener;
 
-    public AdaptorFavorites(Context context, List<Movie> data, MovieItemClickListener movieItemClickListener) {
+
+    public AdaptorFavorites(Context context, MovieItemClickListener movieItemClickListener, List<mMovie>favoriteList) {
         this.context = context;
-        Data = data;
         this.movieItemClickListener = movieItemClickListener;
+        this.favoriteList = favoriteList;
     }
 
     @NonNull
@@ -44,13 +49,16 @@ public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
-        myViewHolder.movie_Title.setText(Data.get(i).getTitle());
-        myViewHolder.poster.setImageResource(Data.get(i).getThumbnail());
+        myViewHolder.movie_Title.setText(favoriteList.get(i).getOriginalTitle());
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+favoriteList.get(i).getPosterPath()).into(myViewHolder.poster);
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return Data.size();
+        return favoriteList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -67,7 +75,7 @@ public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    movieItemClickListener.onMovieClick(Data.get(getAdapterPosition()),poster);
+                   // movieItemClickListener.onMovieClick(favoriteList.get(getAdapterPosition()),poster);
                 }
             });
         }

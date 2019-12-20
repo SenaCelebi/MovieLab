@@ -1,16 +1,11 @@
 package com.example.scele.movielab;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,15 +18,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import android.view.MenuItem;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 
 import com.example.scele.movielab.API.Client;
 import com.example.scele.movielab.API.Service;
-import com.example.scele.movielab.Adapters.MovieAdaptor;
-import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
 import com.example.scele.movielab.Adapters.SliderPageAdapter;
 import com.example.scele.movielab.Adapters.mMovieAdaptor;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
@@ -40,7 +32,6 @@ import com.example.scele.movielab.Models.Slidep;
 import com.example.scele.movielab.Models.Trailer;
 import com.example.scele.movielab.Models.mMovie;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
