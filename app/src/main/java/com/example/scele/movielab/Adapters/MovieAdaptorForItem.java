@@ -37,8 +37,6 @@ import java.util.List;
 public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForItem.MyViewHolder2> {
 
 
-
-
     Context context;
     List<mMovie> Data;
     FavoriteDbHelper favoriteDbHelper;
