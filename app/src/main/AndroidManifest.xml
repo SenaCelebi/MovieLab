@@ -39,6 +39,13 @@
         <activity android:name=".WatchListActivity" />
         <activity android:name=".MovieDetailActivity" />
         <activity android:name=".SettingsActivity"></activity>
+
+        <provider
+            android:name=".Database.DBProvider"
+            android:authorities="com.example.scele.movielab"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>
