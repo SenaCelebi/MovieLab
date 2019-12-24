@@ -4,63 +4,70 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
-import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.mMovie;
 import com.example.scele.movielab.MovieItemClickListener;
 import com.example.scele.movielab.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyViewHolder> {
+public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyViewHolder> {
+
+    private Cursor mCursor;
 
     Context context;
-    List<mMovie> favoriteList;
+    List<mMovie> watchlist;
     MovieItemClickListener movieItemClickListener;
 
-
-    public AdaptorFavorites(Context context, MovieItemClickListener movieItemClickListener, List<mMovie>favoriteList) {
+    public AdapterWatchList(Context context, MovieItemClickListener movieItemClickListener) {
         this.context = context;
         this.movieItemClickListener = movieItemClickListener;
-        this.favoriteList = favoriteList;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.item_favorites,viewGroup,false);
-        return new MyViewHolder(view);
-
-
+        View view = LayoutInflater.from(context).inflate(R.layout.item_watchlist,viewGroup,false);
+        return new AdapterWatchList.MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
-        myViewHolder.movie_Title.setText(favoriteList.get(i).getOriginalTitle());
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+favoriteList.get(i).getPosterPath()).into(myViewHolder.poster);
+        mCursor.moveToPosition(i);
+
+        String title = mCursor.getString(2);
+        String path = mCursor.getString(4);
+
+        myViewHolder.movie_Title.setText(title);
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+path).into(myViewHolder.poster);
     }
 
     @Override
     public int getItemCount() {
-        return favoriteList.size();
+        if (mCursor == null){
+            return 0;
+        }
+        else{
+            return mCursor.getCount();
+        }
     }
+
+    public void swapCursor(Cursor newCursor){
+        mCursor = newCursor;
+        notifyDataSetChanged();
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView movie_Title;
+        private TextView movie_Title, movie_rate;
         private ImageView poster;
 
 
@@ -68,15 +75,14 @@ public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyVi
             super(itemView);
             movie_Title = itemView.findViewById(R.id.tv_movie_name_favorites_item_name);
             poster = itemView.findViewById(R.id.iv_movie_poster_favorites_item);
+            movie_rate = itemView.findViewById(R.id.tv_movie_rate_watchlist_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // movieItemClickListener.onMovieClick(favoriteList.get(getAdapterPosition()),poster);
+                    // movieItemClickListener.onMovieClick(favoriteList.get(getAdapterPosition()),poster);
                 }
             });
         }
     }
-
 }
-

@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
 
 public class Contract {
 
-    public static final String CONTENT_AUTHORITY = "com.example.scele.movielab.Database";
+    public static final String CONTENT_AUTHORITY = "com.example.scele.movielab";
     public static final Uri BASE_CONTENT_URI  = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_FAVORITIES      = "favorities";
     public static final String PATH_WATCHLIST    = "watchlist";

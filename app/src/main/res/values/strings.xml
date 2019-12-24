@@ -42,6 +42,7 @@
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="voteCount">Vote Count</string>
     <string name="trailers">Trailers</string>
+    <string name="my_watch_list">My Watch List</string>
 
 
 </resources>

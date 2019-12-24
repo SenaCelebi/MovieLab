@@ -1,21 +1,45 @@
 package com.example.scele.movielab;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
-import android.preference.PreferenceFragment;
+import android.content.Loader;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.example.scele.movielab.Adapters.AdapterWatchList;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
-import com.example.scele.movielab.Fragments.TopRatedFragment;
-import com.example.scele.movielab.Fragments.WatchListFragment;
+import com.example.scele.movielab.Database.Contract;
+import com.example.scele.movielab.Models.Movie;
 
-public class WatchListActivity extends AppCompatActivity {
+public class WatchListActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor>,
+        MovieItemClickListener {
+
+    public static final int      WATCHLIST_LOADER = 0;
+    public static final String[] MAIN_WATCHLIST_PROJECTION = {
+            Contract.WatchListEntry._ID,
+            Contract.WatchListEntry.COLUMN_MOVIEID,
+            Contract.WatchListEntry.COLUMN_TITLE,
+            Contract.WatchListEntry.COLUMN_USERRATING,
+            Contract.WatchListEntry.COLUMN_POSTERPATH,
+            Contract.WatchListEntry.COLUMN_OVERVIEW,
+    };
+
+    private AdapterWatchList mAdapter;
+    private RecyclerView watchList;
+    private DividerItemDecoration mDividerItemDecoration;
 
     BottomNavigationView navigationView;
     Intent intent;
@@ -72,30 +96,18 @@ public class WatchListActivity extends AppCompatActivity {
         });
 
 
-        //Ikıncı navigation bar icin fragmentlarla olusturulan
-        BottomNavigationView bottomNavigationViewUp = findViewById(R.id.up_navigation_bar);
-        bottomNavigationViewUp.setOnNavigationItemSelectedListener(navListener);
+        getLoaderManager().initLoader(WATCHLIST_LOADER, null, this);
 
+        watchList = findViewById(R.id.recycle_view_watchlist);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        watchList.setLayoutManager(layoutManager);
+        watchList.setHasFixedSize(true);
+        mDividerItemDecoration            = new DividerItemDecoration(watchList.getContext(), layoutManager.getOrientation());
+        watchList.addItemDecoration(mDividerItemDecoration);
+        mAdapter                          = new AdapterWatchList(this, this);
+        watchList.setAdapter(mAdapter);
 
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            PreferenceFragment fragment = null;
-            switch (menuItem.getItemId()){
-                case R.id.up_nav_most_rated:
-                    fragment = new TopRatedFragment();
-                    break;
-                case R.id.up_nav_watchlist:
-                    fragment = new WatchListFragment();
-                    break;
-            }
-            //
-            // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_up,fragment).commit();
-            return true;
-        }
-    };
 
 
     @Override
@@ -123,5 +135,34 @@ public class WatchListActivity extends AppCompatActivity {
             finish();
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        String sortOrder             = Contract.WatchListEntry.W_CONTENT_URI + " ASC";
+        Uri weatherForLocationUri = Contract.WatchListEntry.W_CONTENT_URI;
+
+        return new CursorLoader(this,
+                weatherForLocationUri,
+                MAIN_WATCHLIST_PROJECTION,
+                null,
+                null,
+                sortOrder);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
+    }
+
+    @Override
+    public void onMovieClick(Movie movie, ImageView moviePoster) {
+
     }
 }
