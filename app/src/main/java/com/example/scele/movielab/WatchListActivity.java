@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +30,6 @@ public class WatchListActivity extends AppCompatActivity implements
 
     public static final int      WATCHLIST_LOADER = 0;
     public static final String[] MAIN_WATCHLIST_PROJECTION = {
-            Contract.WatchListEntry._ID,
             Contract.WatchListEntry.COLUMN_MOVIEID,
             Contract.WatchListEntry.COLUMN_TITLE,
             Contract.WatchListEntry.COLUMN_USERRATING,
@@ -102,10 +102,10 @@ public class WatchListActivity extends AppCompatActivity implements
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         watchList.setLayoutManager(layoutManager);
         watchList.setHasFixedSize(true);
-        mDividerItemDecoration            = new DividerItemDecoration(watchList.getContext(), layoutManager.getOrientation());
-        watchList.addItemDecoration(mDividerItemDecoration);
         mAdapter                          = new AdapterWatchList(this, this);
         watchList.setAdapter(mAdapter);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        watchList.setLayoutManager(staggeredGridLayoutManager);
 
     }
 
@@ -140,7 +140,7 @@ public class WatchListActivity extends AppCompatActivity implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        String sortOrder             = Contract.WatchListEntry.W_CONTENT_URI + " ASC";
+        String sortOrder             = Contract.WatchListEntry.COLUMN_MOVIEID + " ASC";
         Uri weatherForLocationUri = Contract.WatchListEntry.W_CONTENT_URI;
 
         return new CursorLoader(this,

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,10 @@ public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyVi
 
         mCursor.moveToPosition(i);
 
-        String title = mCursor.getString(2);
-        String path = mCursor.getString(4);
+        Log.v("count", String.valueOf(i));
+
+        String title = mCursor.getString(1);
+        String path = mCursor.getString(3);
 
         myViewHolder.movie_Title.setText(title);
         Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+path).into(myViewHolder.poster);
@@ -55,7 +58,8 @@ public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyVi
             return 0;
         }
         else{
-            return mCursor.getCount();
+            int count = mCursor.getCount();
+            return count;
         }
     }
 

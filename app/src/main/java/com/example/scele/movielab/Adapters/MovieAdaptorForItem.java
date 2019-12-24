@@ -141,7 +141,7 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
 
                    mResolver.insert(Contract.WatchListEntry.W_CONTENT_URI, values);
 
-                   Log.v("addedto", "added");
+                   Log.v("addedto",  movie.getOriginalTitle());
 
                }
                else {
