@@ -162,7 +162,7 @@ public class DBProvider extends ContentProvider {
                         selectionArgs);
                 break;
             case WATCHLIST:
-                rowsDeleted = db.delete(Contract.WatchListEntry.TABLE_NAME, selection,
+                 rowsDeleted = db.delete(Contract.WatchListEntry.TABLE_NAME, selection,
                         selectionArgs);
                 break;
             case USERS:
