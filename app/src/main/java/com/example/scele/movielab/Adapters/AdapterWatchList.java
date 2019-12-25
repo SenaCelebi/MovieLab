@@ -18,7 +18,7 @@ import com.example.scele.movielab.R;
 
 import java.util.List;
 
-public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyViewHolder> {
+public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.FavItemViewHolder> {
 
     private Cursor mCursor;
 
@@ -33,21 +33,22 @@ public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyVi
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public FavItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_watchlist,viewGroup,false);
-        return new AdapterWatchList.MyViewHolder(view);
+        return new AdapterWatchList.FavItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull FavItemViewHolder myViewHolder, int i) {
 
         mCursor.moveToPosition(i);
 
-        Log.v("count", String.valueOf(i));
+        Log.i("test", "mcursor count on bind " + i);
 
         String title = mCursor.getString(1);
         String path = mCursor.getString(3);
 
+        Log.i("test", ""+myViewHolder.getItemId());
         myViewHolder.movie_Title.setText(title);
         Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+path).into(myViewHolder.poster);
     }
@@ -59,6 +60,7 @@ public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyVi
         }
         else{
             int count = mCursor.getCount();
+            Log.i("test", count + "get item count");
             return count;
         }
     }
@@ -69,16 +71,16 @@ public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.MyVi
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class FavItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView movie_Title, movie_rate;
         private ImageView poster;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        public FavItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            movie_Title = itemView.findViewById(R.id.tv_movie_name_favorites_item_name);
-            poster = itemView.findViewById(R.id.iv_movie_poster_favorites_item);
+            movie_Title = itemView.findViewById(R.id.tv_movie_name_watchlist_item);
+            poster = itemView.findViewById(R.id.iv_movie_poster_watchlist_item);
             movie_rate = itemView.findViewById(R.id.tv_movie_rate_watchlist_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
