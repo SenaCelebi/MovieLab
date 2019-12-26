@@ -46,10 +46,12 @@ public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.FavI
         Log.i("test", "mcursor count on bind " + i);
 
         String title = mCursor.getString(1);
+        String rate = mCursor.getString(2);
         String path = mCursor.getString(3);
 
         Log.i("test", ""+myViewHolder.getItemId());
         myViewHolder.movie_Title.setText(title);
+        myViewHolder.movie_rate.setText(rate);
         Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+path).into(myViewHolder.poster);
     }
 

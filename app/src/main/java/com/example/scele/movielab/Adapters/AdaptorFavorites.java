@@ -50,6 +50,7 @@ public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
         myViewHolder.movie_Title.setText(favoriteList.get(i).getOriginalTitle());
+        myViewHolder.movie_Rate.setText(String.valueOf(favoriteList.get(i).getVoteAverage()));
         Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+favoriteList.get(i).getPosterPath()).into(myViewHolder.poster);
     }
 
@@ -60,13 +61,14 @@ public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView movie_Title;
+        private TextView movie_Title, movie_Rate;
         private ImageView poster;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             movie_Title = itemView.findViewById(R.id.tv_movie_name_favorites_item_name);
+            movie_Rate = itemView.findViewById(R.id.tv_movie_rate_favorites_item);
             poster = itemView.findViewById(R.id.iv_movie_poster_favorites_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {

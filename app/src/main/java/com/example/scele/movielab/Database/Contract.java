@@ -12,6 +12,9 @@ public class Contract {
     public static final String PATH_FAVORITIES      = "favorities";
     public static final String PATH_WATCHLIST    = "watchlist";
     public static final String PATH_USERS    = "users";
+    public static final String PATH_USERS_AND_FAVORITIES    = "usersfavorities";
+    public static final String PATH_USERS_AND_WATCHLIST   = "userswatchlist";
+
 
     public static final class FavoriteEntry implements BaseColumns {
 

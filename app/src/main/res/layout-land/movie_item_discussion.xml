@@ -79,47 +79,8 @@
                 android:textColor="@color/colorGrey1"
                 android:textSize="12sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:layout_marginStart="10dp"
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/discuss"
-                    android:tint="#000"
-                    />
-                <TextView
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/textInputHintStyle"
-                    android:text="@string/make_comments"
-                    android:textColor="@color/colorAccent"
-                    android:textColorHint="@color/colorTint"
-                    android:textSize="14sp"
-                    />
-            </LinearLayout>
-
 
         </LinearLayout>
-
-        <CheckBox
-            android:layout_marginStart="18dp"
-            android:id="@+id/check"
-            android:layout_width="30dp"
-            android:layout_height="38dp"
-            android:background="@drawable/checkbox_selector"
-            android:button="@null"
-            android:gravity="center"
-            android:textSize="12sp" />
-
-
 
 
     </LinearLayout>

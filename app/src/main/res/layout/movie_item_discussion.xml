@@ -68,15 +68,7 @@ app:cardCornerRadius="5dp"
 
             </LinearLayout>
 
-            <CheckBox
-                android:layout_marginStart="60dp"
-                android:id="@+id/check"
-                android:layout_width="30dp"
-                android:layout_height="38dp"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:gravity="center"
-                android:textSize="12sp" />
+
 
         </LinearLayout>
 
@@ -90,35 +82,9 @@ app:cardCornerRadius="5dp"
             android:text="@string/detail_movie_descr"
             style="@style/textInputHintStyle"
             android:textSize="12sp"
-            android:maxLines="6"
+            android:maxLines="7"
             android:textColor="@color/colorGrey1"
             android:lineSpacingExtra="3dp"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/discuss"
-                android:tint="#000"
-                />
-            <TextView
-                android:layout_marginTop="7dp"
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/textInputHintStyle"
-                android:text="@string/make_comments"
-                android:textColor="@color/colorAccent"
-                android:textColorHint="@color/colorTint"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
 
 
     </LinearLayout>
