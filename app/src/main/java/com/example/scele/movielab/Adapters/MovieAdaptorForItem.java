@@ -156,6 +156,9 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                         String[] selectionArgs = { searchItem } ;
                         mResolver.delete(uri, selection, selectionArgs);
 
+                        Snackbar.make(buttonView, "Removed to Watchlist",
+                                Snackbar.LENGTH_LONG).show();
+
                     }
                 }
             });
@@ -187,6 +190,9 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                         mResolver.insert(Contract.WatchListEntry.W_CONTENT_URI, values);
 
                         Log.v("addedto",  movie.getOriginalTitle());
+
+                        Snackbar.make(buttonView, "Added to Watchlist",
+                                Snackbar.LENGTH_LONG).show();
                     }
                     else {
                         //Do nothing

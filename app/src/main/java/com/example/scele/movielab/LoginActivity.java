@@ -52,13 +52,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.v("testsena","basıldı");
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
-                if (isEmailExist(email) && isPasswordExist(password)){
-                    intent = new Intent(LoginActivity.this,HomeActivity.class);
-                    startActivity(intent);
+                if (email == null || email.matches("") || password.matches("")|| password == null){
+                    Toast.makeText(this, "Please Fill the Blanks", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (isEmailExist(email) && isPasswordExist(password)){
+                        intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(this, "Wrong E-mail or Password", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
-                    Toast.makeText(this, "Wrong E-mail or Password", Toast.LENGTH_SHORT).show();
-                }
+
+
                 break;
             case R.id.btn_register_inlogin:
                 intent = new Intent(LoginActivity.this,RegisterActivity.class);
