@@ -53,7 +53,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     FavoriteDbHelper favoriteDbHelper;
     mMovie movie;
     private ContentResolver mResolver;
-    private SQLiteDatabase sqLiteDatabase;
 
     public MovieAdaptorForItem(Context context, List<mMovie> data) {
         this.context = context;
@@ -70,7 +69,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder2 myViewHolder2, final int i) {
-
         myViewHolder2.movie_Title.setText(Data.get(i).getOriginalTitle());
         String vote = Double.toString(Data.get(i).getVoteAverage());
         myViewHolder2.releaseDate.setText(vote);
@@ -89,18 +87,19 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked){
-
+                        //Do nothing
                     }
                     else {
-                        SharedPreferences.Editor editor = (SharedPreferences.Editor) context.getSharedPreferences("com.example.scele.movielab.Adapters.MovieAdaptorForItem", Context.MODE_PRIVATE).edit();
-                        editor.putBoolean("Favorite Added", false);
-                        editor.commit();
+                        //Delete from favorites
 
-                        Snackbar.make(buttonView, "Removed to Favorite",
+                        String selection = Contract.FavoriteEntry.COLUMN_TITLE + " =?";
+                        Uri uri = Contract.FavoriteEntry.F_CONTENT_URI;
+                        String searchItem = Data.get(i).getTitle();
+                        String[] selectionArgs = { searchItem } ;
+                        mResolver.delete(uri, selection, selectionArgs);
+
+                        Snackbar.make(buttonView, "Removed to Favorites",
                                 Snackbar.LENGTH_LONG).show();
-
-                        Log.v("unchecked", "cccccccc");
-                        favoriteDbHelper.deleteFavorite(i);
                     }
                 }
             });
@@ -111,14 +110,8 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked){
-                        SharedPreferences.Editor editor = (SharedPreferences.Editor) context.getSharedPreferences("com.example.scele.movielab.Adapters.MovieAdaptorForItem", Context.MODE_PRIVATE).edit();
-                        editor.putBoolean("Favorite Added", true);
-                        editor.commit();
+                        //Add movie to favorites
 
-                        Snackbar.make(buttonView, "Added to Favorite",
-                                Snackbar.LENGTH_LONG).show();
-
-                        Log.v("checked", "asdfg");
                         int movie_id = i;
                         String rate = Data.get(i).getVoteAverage().toString();
                         String pster = Data.get(i).getPosterPath();
@@ -129,10 +122,24 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                         movie.setVoteAverage(Double.parseDouble(rate));
                         movie.setOverview(Data.get(i).getOverview());
 
-                        favoriteDbHelper.addMovie(movie);
+                        ContentValues values = new ContentValues();
+
+                        values.put(Contract.FavoriteEntry.COLUMN_MOVIEID, movie_id);
+                        values.put(Contract.FavoriteEntry.COLUMN_POSTERPATH, pster);
+                        values.put(Contract.FavoriteEntry.COLUMN_TITLE, movie.getOriginalTitle());
+                        values.put(Contract.FavoriteEntry.COLUMN_OVERVIEW, movie.getOverview());
+                        values.put(Contract.FavoriteEntry.COLUMN_USERRATING, rate);
+
+                        mResolver.insert(Contract.FavoriteEntry.F_CONTENT_URI, values);
+
+                        Log.v("addedto",  movie.getOriginalTitle());
+
+                        Snackbar.make(buttonView, "Added to Favorites",
+                                Snackbar.LENGTH_LONG).show();
+
                     }
                     else {
-
+                        //Do nothing
                     }
                 }
             });
@@ -148,7 +155,7 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                         //Do nothing
                     }
                     else {
-                        //Delete
+                        //Delete from watchlist
 
                         String selection = Contract.WatchListEntry.COLUMN_TITLE + " =?";
                         Uri uri = Contract.WatchListEntry.W_CONTENT_URI;
@@ -169,6 +176,8 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked){
+                        // Add movie to watchlist
+
                         int movie_id = i;
                         String rate = Data.get(i).getVoteAverage().toString();
                         String pster = Data.get(i).getPosterPath();
@@ -202,7 +211,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
 
         }
 
-
         myViewHolder2.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,22 +234,21 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
 
     public boolean Exists(String searchItem){
         String projection [] = {
-                FavoriteContract.FavoriteEntry._ID,
-                FavoriteContract.FavoriteEntry.COLUMN_MOVIEID,
-                FavoriteContract.FavoriteEntry.COLUMN_TITLE,
-                FavoriteContract.FavoriteEntry.COLUMN_USERRATING,
-                FavoriteContract.FavoriteEntry.COLUMN_POSTERPATH,
-                FavoriteContract.FavoriteEntry.COLUMN_OVERVIEW
-
+                Contract.FavoriteEntry._ID,
+                Contract.FavoriteEntry.COLUMN_MOVIEID,
+                Contract.FavoriteEntry.COLUMN_TITLE,
+                Contract.FavoriteEntry.COLUMN_USERRATING,
+                Contract.FavoriteEntry.COLUMN_POSTERPATH,
+                Contract.FavoriteEntry.COLUMN_OVERVIEW
         };
 
-        sqLiteDatabase = favoriteDbHelper.getWritableDatabase();
-        String selection = FavoriteContract.FavoriteEntry.COLUMN_TITLE + " =?";
+        Uri uri = Contract.FavoriteEntry.F_CONTENT_URI;
+        String selection = Contract.FavoriteEntry.COLUMN_TITLE + " =?";
         String [] selectionArgs = { searchItem };
         Log.v("senan",searchItem.toString());
         String Limit = "1";
 
-        Cursor cursor = sqLiteDatabase.query(FavoriteContract.FavoriteEntry.TABLE_NAME, projection,selection,selectionArgs,null,null,null,Limit);
+        Cursor cursor = mResolver.query(uri, projection,selection,selectionArgs,Limit);
         boolean exists = (cursor.getCount()>0);
         cursor.close();
         return exists;
@@ -255,7 +262,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                 Contract.WatchListEntry.COLUMN_USERRATING,
                 Contract.WatchListEntry.COLUMN_POSTERPATH,
                 Contract.WatchListEntry.COLUMN_OVERVIEW
-
         };
 
         Uri uri = Contract.WatchListEntry.W_CONTENT_URI;

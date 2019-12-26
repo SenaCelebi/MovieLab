@@ -16,14 +16,12 @@ import com.example.scele.movielab.Models.mMovie;
 import com.example.scele.movielab.MovieItemClickListener;
 import com.example.scele.movielab.R;
 
-import java.util.List;
 
 public class AdapterWatchList extends RecyclerView.Adapter<AdapterWatchList.FavItemViewHolder> {
 
     private Cursor mCursor;
 
     Context context;
-    List<mMovie> watchlist;
     MovieItemClickListener movieItemClickListener;
 
     public AdapterWatchList(Context context, MovieItemClickListener movieItemClickListener) {

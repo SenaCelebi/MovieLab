@@ -39,9 +39,7 @@ public class WatchListActivity extends AppCompatActivity implements
 
     private AdapterWatchList mAdapter;
     private RecyclerView watchList;
-    private DividerItemDecoration mDividerItemDecoration;
 
-    BottomNavigationView navigationView;
     Intent intent;
 
     @Override

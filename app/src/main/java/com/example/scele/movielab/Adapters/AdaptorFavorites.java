@@ -25,38 +25,55 @@ import java.util.List;
 
 public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyViewHolder> {
 
+    private Cursor mCursor;
+
     Context context;
-    List<mMovie> favoriteList;
     MovieItemClickListener movieItemClickListener;
 
 
-    public AdaptorFavorites(Context context, MovieItemClickListener movieItemClickListener, List<mMovie>favoriteList) {
+    public AdaptorFavorites(Context context, MovieItemClickListener movieItemClickListener) {
         this.context = context;
         this.movieItemClickListener = movieItemClickListener;
-        this.favoriteList = favoriteList;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.item_favorites,viewGroup,false);
         return new MyViewHolder(view);
-
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+        mCursor.moveToPosition(i);
 
-        myViewHolder.movie_Title.setText(favoriteList.get(i).getOriginalTitle());
-        myViewHolder.movie_Rate.setText(String.valueOf(favoriteList.get(i).getVoteAverage()));
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+favoriteList.get(i).getPosterPath()).into(myViewHolder.poster);
+        Log.i("test", "mcursor count on bind " + i);
+
+        String title = mCursor.getString(1);
+        String rate = mCursor.getString(2);
+        String path = mCursor.getString(3);
+
+        Log.i("test", ""+myViewHolder.getItemId());
+        myViewHolder.movie_Title.setText(title);
+        myViewHolder.movie_Rate.setText(rate);
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+path).into(myViewHolder.poster);
     }
 
     @Override
     public int getItemCount() {
-        return favoriteList.size();
+        if (mCursor == null){
+            return 0;
+        }
+        else{
+            int count = mCursor.getCount();
+            Log.i("test", count + "get item count");
+            return count;
+        }
+    }
+
+    public void swapCursor(Cursor newCursor){
+        mCursor = newCursor;
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
