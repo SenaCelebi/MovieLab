@@ -3,6 +3,8 @@ package com.example.scele.movielab;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
@@ -27,6 +29,7 @@ import com.example.scele.movielab.API.Service;
 import com.example.scele.movielab.Adapters.SliderPageAdapter;
 import com.example.scele.movielab.Adapters.mMovieAdaptor;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
+import com.example.scele.movielab.Broadcast.NetworkChangeBroadcastReceiver;
 import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.Slidep;
 import com.example.scele.movielab.Models.Trailer;
@@ -63,6 +66,8 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
     private static String name1, name2, name3, name4;
     private static int id1, id2, id3, id4;
 
+    private NetworkChangeBroadcastReceiver receiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +78,11 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         getSupportActionBar().setLogo(R.drawable.logoaction);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //Broadcast Receiver
+        IntentFilter ıntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeBroadcastReceiver();
+        registerReceiver(receiver, ıntentFilter);
 
 
         //Bottom Navigation Bar Control
@@ -304,4 +314,10 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
 }
+

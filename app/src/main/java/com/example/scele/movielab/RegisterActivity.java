@@ -46,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 
-
     public void init(){
         et_email = findViewById(R.id.et_email_register);
         et_name_surname = findViewById(R.id.et_namesurname_register);
