@@ -13,6 +13,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.example.scele.movielab.DiscussionActivity;
 import com.example.scele.movielab.HomeActivity;
 import com.example.scele.movielab.R;
 import com.example.scele.movielab.SearchActivity;
@@ -44,7 +45,7 @@ public class NotificationUtils {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        Intent yesIntent = new Intent(context, SearchActivity.class);
+        Intent yesIntent = new Intent(context, DiscussionActivity.class);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent yesPendingIntent = PendingIntent.getActivity(context,ACTION_DRINK_PENDING_INTENT_ID, yesIntent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -58,15 +59,15 @@ public class NotificationUtils {
                 .setColor(ContextCompat.getColor(context,R.color.colorBackground))
                 .setSmallIcon(R.drawable.logo2)
                 .setLargeIcon(largeIcon(context))
-                .setContentTitle("CineLAB")
-                .setContentText("Do you want to check movies")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("Do you want to check movies"))
+                .setContentTitle("CineLab")
+                .setContentText(context.getString(R.string.text_notification))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.text_notification)))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(contentIntent(context))
                 .setAutoCancel(true)
-        .addAction(R.drawable.ic_play_arrow_black_24dp,"YES", yesPendingIntent )
-        .addAction(R.drawable.ic_play_arrow_black_24dp, "NO", noPendingIntent);
-        
+        .addAction(R.drawable.ic_play_arrow_black_24dp,context.getString(R.string.yes_notification), yesPendingIntent )
+        .addAction(R.drawable.ic_play_arrow_black_24dp, context.getString(R.string.no_notification), noPendingIntent);
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);

@@ -38,4 +38,7 @@
     <string name="voteCount">Oy Sayısı</string>
     <string name="trailers">Tanıtımlar</string>
     <string name="my_watch_list">İzlenecekler Listem</string>
+    <string name="text_notification">Bu haftanın popüler filmlerine göz atmak ister misin?</string>
+    <string name="yes_notification">Evet, isterim</string>
+    <string name="no_notification">Hayır, istemem</string>
 </resources>
