@@ -1,6 +1,9 @@
 package com.example.scele.movielab;
 
 import android.app.ActivityOptions;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -20,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,6 +38,8 @@ import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.Slidep;
 import com.example.scele.movielab.Models.Trailer;
 import com.example.scele.movielab.Models.mMovie;
+import com.example.scele.movielab.Service.MovieJobService;
+import com.example.scele.movielab.Utilities.NotificationUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,6 +74,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
 
     private NetworkChangeBroadcastReceiver receiver;
 
+    IntentFilter              mChargingIntentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +90,24 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         IntentFilter ıntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         receiver = new NetworkChangeBroadcastReceiver();
         registerReceiver(receiver, ıntentFilter);
+
+        //Job scheduler
+
+        ComponentName componentName = new ComponentName(this, MovieJobService.class);
+        JobInfo info = new JobInfo.Builder(123, componentName)
+                .setRequiresCharging(true)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPeriodic(10*15*1000)
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d("home", "Job scheduled");
+        } else {
+            Log.d("home", "Job scheduling failed");
+        }
+
 
 
         //Bottom Navigation Bar Control
@@ -129,6 +154,24 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         loadJSON();
         loadJSONforUpcoming();
 
+    }
+
+    public void testNotification(View view) {
+        NotificationUtils.remindUserBecauseCharging(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.v("onStart", "onStart finished!");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Log.v("onStop", "onStop finished!");
     }
 
    private void loadJSON(){

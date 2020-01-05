@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
         android:allowBackup="true"
@@ -47,6 +49,14 @@
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".Service.MovieReminderIntentService"
+            android:exported="false">
+        </service>
+        <service
+            android:name=".Service.MovieJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider
             android:name=".Database.DBProvider"

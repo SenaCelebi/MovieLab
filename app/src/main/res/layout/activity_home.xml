@@ -59,7 +59,6 @@
                     android:layout_height="230dp" />
 
 
-
             </android.support.v4.widget.SwipeRefreshLayout>
 
             <TextView
@@ -80,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:text="@string/upcoming_movies"
+                android:onClick="testNotification"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
@@ -101,20 +101,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp" />
 
-
             </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
 
         </android.support.constraint.ConstraintLayout>
 
-
-
     </android.support.v4.widget.NestedScrollView>
-
-
-
 
 
 
@@ -129,6 +121,8 @@
         app:itemTextColor="@color/colorGrey1"
         app:menu="@menu/bottom_navigation"
         android:layout_alignParentBottom="true"
+
+
         />
 
 </RelativeLayout>
