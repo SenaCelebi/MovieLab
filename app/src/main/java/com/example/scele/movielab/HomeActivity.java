@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
         JobInfo info = new JobInfo.Builder(123, componentName)
                 .setRequiresCharging(true)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-                .setPeriodic(60*1000)
+                .setPeriodic(604800000)
                 .build();
 
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);

@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ll1"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
     <TextView
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
@@ -17,13 +23,31 @@
         android:textSize="18sp"
         android:textColor="@color/colorAccent"
         style="@style/textInputHintStyle"/>
+
+        <Button
+            android:id="@+id/btn_register_with_email_activity_register"
+            style="@style/textInputHintStyle"
+            android:layout_width="140dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button"
+            android:hint="@string/test_notification"
+            android:textAlignment="center"
+            android:onClick="testN"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view_discussion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/tv1"
+        android:layout_below="@+id/ll1"
         android:layout_above="@id/bottom_appbar"/>
     <FrameLayout
         android:id="@+id/fragment_container"

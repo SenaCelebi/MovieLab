@@ -27,8 +27,9 @@
     <string name="my_watchlist">My WatchList</string>
     <string name="let_s_discuss">Popular Movies</string>
     <string name="text_notification">Do you want to look at your movie lists?</string>
-    <string name="yes_notification">Look at Favorites</string>
-    <string name="no_notification">Look at Watchlist</string>
+    <string name="yes_notification">My Favorites</string>
+    <string name="no_notification">My Watchlist</string>
+    <string name="test_notification">Test Notification</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

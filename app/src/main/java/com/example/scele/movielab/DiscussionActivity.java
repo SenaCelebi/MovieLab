@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.example.scele.movielab.Adapters.MovieAdaptorForDiscuss;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
 import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.mMovie;
+import com.example.scele.movielab.Utilities.NotificationUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -101,6 +103,18 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
 
 
     }
+
+    public void testN(View view) {
+        NotificationUtils.remindUserBecauseCharging(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.v("onStart", "onStart finished!");
+    }
+
     private void loadJSONDiscussion(){
 
         Client client = new Client();
