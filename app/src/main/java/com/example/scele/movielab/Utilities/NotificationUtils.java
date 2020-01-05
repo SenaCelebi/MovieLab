@@ -13,10 +13,13 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.example.scele.movielab.Database.Contract;
 import com.example.scele.movielab.DiscussionActivity;
+import com.example.scele.movielab.FavoritesActivity;
 import com.example.scele.movielab.HomeActivity;
 import com.example.scele.movielab.R;
 import com.example.scele.movielab.SearchActivity;
+import com.example.scele.movielab.WatchListActivity;
 
 public class NotificationUtils {
 
@@ -45,11 +48,11 @@ public class NotificationUtils {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        Intent yesIntent = new Intent(context, DiscussionActivity.class);
+        Intent yesIntent = new Intent(context, FavoritesActivity.class);
         yesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent yesPendingIntent = PendingIntent.getActivity(context,ACTION_DRINK_PENDING_INTENT_ID, yesIntent, PendingIntent.FLAG_ONE_SHOT);
 
-        Intent noIntent = new Intent(context, HomeActivity.class);
+        Intent noIntent = new Intent(context, WatchListActivity.class);
         noIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent noPendingIntent = PendingIntent.getActivity(context,ACTION_IGNORE_PENDING_INTENT_ID, noIntent, PendingIntent.FLAG_ONE_SHOT);
 
