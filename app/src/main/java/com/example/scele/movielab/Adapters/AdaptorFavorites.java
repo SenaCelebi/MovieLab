@@ -26,7 +26,6 @@ import java.util.List;
 public class AdaptorFavorites extends RecyclerView.Adapter<AdaptorFavorites.MyViewHolder> {
 
     private Cursor mCursor;
-
     Context context;
     MovieItemClickListener movieItemClickListener;
 

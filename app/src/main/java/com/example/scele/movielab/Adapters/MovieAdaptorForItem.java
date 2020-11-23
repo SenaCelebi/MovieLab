@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 
@@ -28,6 +29,7 @@ import com.example.scele.movielab.Models.mMovie;
 import com.example.scele.movielab.MovieDetailActivity;
 import com.example.scele.movielab.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.scele.movielab.R.*;
@@ -38,6 +40,13 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     List<mMovie> Data;
     mMovie movie;
     private ContentResolver mResolver;
+    public static HashMap<String, Integer> staredMovies = new HashMap < > ();
+
+
+    public MovieAdaptorForItem() {
+
+        staredMovies.put("Titanic",1);
+    }
 
     public MovieAdaptorForItem(Context context, List<mMovie> data) {
         this.context = context;
@@ -53,7 +62,7 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder2 myViewHolder2, final int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder2 myViewHolder2,final int i) {
         myViewHolder2.movie_Title.setText(Data.get(i).getOriginalTitle());
         String vote = Double.toString(Data.get(i).getVoteAverage());
         myViewHolder2.releaseDate.setText(vote);
@@ -64,8 +73,16 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         movie = new mMovie();
 
+
+
         if (Exists(Data.get(i).getTitle())){
+            //stars
             myViewHolder2.favorite.setChecked(true);
+
+
+
+
+
             myViewHolder2.favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -86,8 +103,52 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                     }
                 }
             });
-        }
-        else {
+        } else {
+
+
+            myViewHolder2.ratingStars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                    int rating = (int) v;
+
+
+
+                    switch (rating){
+                        case 1:
+                            staredMovies.put( Data.get(i).getOriginalTitle().toString(),1);
+                            Snackbar.make(ratingBar, "You gave 1 star to "+Data.get(i).getOriginalTitle().toString(),
+                                    Snackbar.LENGTH_LONG).show();
+
+                            break;
+                        case 2:
+                            staredMovies.put(  Data.get(i).getOriginalTitle().toString(),2);
+                            Snackbar.make(ratingBar, "You gave 2 stars to "+Data.get(i).getOriginalTitle().toString(),
+                                    Snackbar.LENGTH_LONG).show();
+
+                            break;
+                        case 3:
+                            staredMovies.put( Data.get(i).getOriginalTitle().toString(),3);
+                            Snackbar.make(ratingBar, "You gave 3 stars to "+Data.get(i).getOriginalTitle().toString(),
+                                    Snackbar.LENGTH_LONG).show();
+
+                            break;
+                        case 4:
+                            staredMovies.put(  Data.get(i).getOriginalTitle().toString(),4);
+                            Snackbar.make(ratingBar, "You gave 4 stars to "+Data.get(i).getOriginalTitle().toString(),
+                                    Snackbar.LENGTH_LONG).show();
+
+                            break;
+                        case 5:
+                            staredMovies.put(  Data.get(i).getOriginalTitle().toString(),5);
+                            Snackbar.make(ratingBar, "You gave 5 stars to "+Data.get(i).getOriginalTitle().toString(),
+                                    Snackbar.LENGTH_LONG).show();
+                           Log.v("hash", staredMovies.toString());
+
+                            break;
+                    }
+
+                }
+            });
 
             myViewHolder2.favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -154,7 +215,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
             });
         }
         else {
-
             myViewHolder2.watchList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -204,7 +264,6 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
                 intent.putExtra("movie_poster", Data.get(i).getPosterPath());
                 intent.putExtra("id", Data.get(i).getId());
                 context.startActivity(intent);
-
             }
         });
 
@@ -266,6 +325,7 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
         private ImageView poster;
         private CardView cardView;
         private CheckBox favorite, watchList;
+        private RatingBar ratingStars;
 
         public MyViewHolder2(@NonNull View itemView) {
             super(itemView);
@@ -275,6 +335,7 @@ public class MovieAdaptorForItem extends RecyclerView.Adapter<MovieAdaptorForIte
             cardView = itemView.findViewById(id.cardView);
             favorite = itemView.findViewById(id.favorite_comments_item);
             watchList = itemView.findViewById(R.id.add_watchlist_comments_item);
+            ratingStars = itemView.findViewById(R.id.stars);
 
         }
     }

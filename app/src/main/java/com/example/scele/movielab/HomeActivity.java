@@ -125,6 +125,7 @@ public class HomeActivity extends AppCompatActivity implements MovieItemClickLis
                     case R.id.nav_search:
                         intent = new Intent(HomeActivity.this, SearchActivity.class);
                         startActivity(intent);
+
                         break;
                     case R.id.nav_discuss:
                         intent = new Intent(HomeActivity.this, DiscussionActivity.class);

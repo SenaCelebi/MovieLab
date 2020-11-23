@@ -17,16 +17,26 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.scele.movielab.API.Client;
 import com.example.scele.movielab.API.Service;
 import com.example.scele.movielab.Adapters.MovieAdaptorForDiscuss;
+import com.example.scele.movielab.Adapters.MovieAdaptorForItem;
 import com.example.scele.movielab.BackgroundTasks.SessionManager;
 import com.example.scele.movielab.Models.Movie;
 import com.example.scele.movielab.Models.mMovie;
 import com.example.scele.movielab.Utilities.NotificationUtils;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +53,64 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion);
+
+        MovieAdaptorForItem getHash = new MovieAdaptorForItem();
+
+        HashMap<String, Integer> staredMovies = new HashMap < String, Integer> ();
+
+        staredMovies.putAll(getHash.staredMovies);
+        Log.v("urlbak", getHash.staredMovies.toString());
+
+
+        int highestRating = 0;
+        String highestMovie = null;
+        for(Map.Entry<String, Integer> pair : staredMovies.entrySet())
+        {
+            if(highestRating < pair.getValue())
+            {
+                highestRating = pair.getValue();
+                highestMovie = pair.getKey();
+            }
+        }
+
+
+        //Replace ' ' with %
+        highestMovie = highestMovie.replace(' ', '%');
+        int idUser = 0;
+
+
+        String URL = "http://127.0.0.1:5000/data?id="+ String.valueOf(idUser)+ "&name=" + highestMovie;
+        Log.v("urlbak", URL);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(DiscussionActivity.this);
+
+
+        StringRequest requestObject = new StringRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+
+                    }
+                },
+                new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+
+
+        requestQueue.add(requestObject);
+
+
+
+
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logoaction);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
