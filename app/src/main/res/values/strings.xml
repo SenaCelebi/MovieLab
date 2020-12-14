@@ -4,7 +4,7 @@
     <string name="movie_name">Movie Name</string>
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
-    <string name="nav_discuss">Popular</string>
+    <string name="nav_discuss">Recommended</string>
     <string name="nav_favorites">Favorites</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_watch_list">WatchList</string>
@@ -25,7 +25,7 @@
     <string name="make_comments">Make Comments...</string>
     <string name="favorilerim">My Favorites</string>
     <string name="my_watchlist">My WatchList</string>
-    <string name="let_s_discuss">Popular Movies</string>
+    <string name="let_s_discuss">Recommended Movies</string>
     <string name="text_notification">Do you want to look at your movie lists?</string>
     <string name="yes_notification">My Favorites</string>
     <string name="no_notification">My Watchlist</string>

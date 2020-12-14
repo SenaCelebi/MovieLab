@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -48,6 +49,7 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
     Intent intent;
     RecyclerView moviesRecycleView;
     Context context = this;
+    TextView movielist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
         setContentView(R.layout.activity_discussion);
 
         MovieAdaptorForItem getHash = new MovieAdaptorForItem();
+
+        movielist = findViewById(R.id.tv1);
 
         HashMap<String, Integer> staredMovies = new HashMap < String, Integer> ();
 
@@ -75,37 +79,41 @@ public class DiscussionActivity extends AppCompatActivity implements MovieItemCl
 
 
         //Replace ' ' with %
-        highestMovie = highestMovie.replace(' ', '%');
-        int idUser = 0;
+        highestMovie = highestMovie.replaceAll(" ", "%20");
+        int idUser = 19;
 
 
-        String URL = "http://127.0.0.1:5000/data?id="+ String.valueOf(idUser)+ "&name=" + highestMovie;
+        String URL = "http://10.0.2.2:5000/last?id="+ String.valueOf(idUser)+ "&name=" + highestMovie;
         Log.v("urlbak", URL);
 
         RequestQueue requestQueue = Volley.newRequestQueue(DiscussionActivity.this);
 
 
         StringRequest requestObject = new StringRequest(
-                Request.Method.GET,
+                com.android.volley.Request.Method.GET,
                 URL,
-                null,
-                new Response.Listener<String>() {
+                new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-
+                        Log.v("apicall", response);
+                        response = response.replaceAll("\\d","");
+                        movielist.setText(response);
                     }
                 },
-                new Response.ErrorListener() {
+                new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                // Do something when error occurred
+                Log.v("apicall", error.toString());
+                Toast.makeText(getApplicationContext(),"Bilgilendirme mesajı",Toast.LENGTH_LONG).show();
 
             }
         });
 
 
-
-        requestQueue.add(requestObject);
+        Volley.newRequestQueue(this).add(requestObject);
+       // requestQueue.add(requestObject);
 
 
 

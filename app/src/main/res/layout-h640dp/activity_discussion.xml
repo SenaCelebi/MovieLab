@@ -14,21 +14,22 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/let_s_discuss"
             android:textSize="20sp"
             android:textColor="@color/colorAccent"
+            android:lineSpacingExtra="10dp"
             style="@style/textInputHintStyle"/>
 
         <Button
             android:id="@+id/btn_register_with_email_activity_register"
             style="@style/textInputHintStyle"
-            android:layout_width="140dp"
-            android:layout_height="29dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="60dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
@@ -42,8 +43,8 @@
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view_discussion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/ll1"

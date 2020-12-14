@@ -5,7 +5,7 @@
     <string name="movie_name">Film Adı</string>
     <string name="nav_home">Ana Sayfa</string>
     <string name="nav_search">Arama</string>
-    <string name="nav_discuss">Popüler</string>
+    <string name="nav_discuss">Öneriler</string>
     <string name="nav_favorites">Favoriler</string>
     <string name="nav_profile">Profil</string>
     <string name="nav_watch_list">İzlenecekler</string>
@@ -25,7 +25,7 @@
     <string name="make_comments">Sen de yorum yap...</string>
     <string name="favorilerim">Favorilerim</string>
     <string name="my_watchlist">İzlenecekler Listem</string>
-    <string name="let_s_discuss">Popüler Filmler</string>
+    <string name="let_s_discuss">Önerilen Filmler</string>
     <string name="top_rated">En Yüksek Puan Alanlar</string>
     <string name="settings_over_flow">Ayarlar</string>
     <string name="preference_name_surname">İsim ve Soyisim</string>
